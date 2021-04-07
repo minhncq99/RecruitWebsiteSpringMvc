@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
         <link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/images/shortcut_icon.png" />" rel="shortcut icon" >
         <script src="<c:url value="/resources/js/index.js"/>"></script>
         <title><tiles:insertAttribute name="title"/></title>
     </head>
