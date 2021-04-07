@@ -10,4 +10,17 @@
 
 <h1>Hello World!</h1>
 <h2>${message}</h2>
+<table>
+    <tr>
+        <th>Mã</th>
+        <th>Tên</th>
+    </tr>
+    <c:forEach items="${careers}" var="career">
+        <tr>
+            <td>${career.id}</td>
+            <td>${career.name}</td>
+        </tr>
+    </c:forEach>
+</table>
+
 
