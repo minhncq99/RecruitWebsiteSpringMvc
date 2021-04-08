@@ -12,25 +12,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+        <link href="<c:url value="/resources/css/base.css"/>" rel="stylesheet">
         <link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/css/footer.css"/>" rel="stylesheet">
+
+
         <link href="<c:url value="/resources/images/shortcut_icon.png" />" rel="shortcut icon" >
-        <script src="<c:url value="/resources/js/index.js"/>"></script>
         <title><tiles:insertAttribute name="title"/></title>
     </head>
     <body>
-        <div class="container">
-            <!-- header -->
-            <tiles:insertAttribute name="header" />
-
-            <!-- content -->
-            <div class="body">
+        <tiles:insertAttribute name="header" />
+        <main>
+            <div class="container">
                 <tiles:insertAttribute name="content" />
             </div>
-
-            <!-- footer -->
-            <tiles:insertAttribute name="footer" />
-        </div>
+        </main>
+        <tiles:insertAttribute name="footer" />
+        <!-- script -->
+        <script src="<c:url value="/resources/js/header.js"/>"></script>
+        <script src="<c:url value="/resources/js/index.js"/>"></script>
     </body>
 </html>

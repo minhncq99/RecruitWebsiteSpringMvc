@@ -41,6 +41,7 @@ public class HibernateConfig {
         LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
         factory.setPackagesToScan("com.java.pojo");
         factory.setDataSource(getDataSource());
+        factory.setHibernateProperties(getProperties());
         return factory;
     }
     

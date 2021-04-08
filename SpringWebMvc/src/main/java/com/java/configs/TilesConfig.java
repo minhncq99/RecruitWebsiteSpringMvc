@@ -14,7 +14,7 @@ public class TilesConfig {
     public UrlBasedViewResolver getUrlBasedViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
         resolver.setViewClass(TilesView.class);
-        resolver.setOrder(2);
+        resolver.setOrder(-2);
         
         return resolver;
     }
@@ -23,7 +23,7 @@ public class TilesConfig {
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer conf = new TilesConfigurer();
         conf.setDefinitions("/WEB-INF/tiles.xml");
-        
+        conf.setCheckRefresh(true);
         return conf;
     }
 }
