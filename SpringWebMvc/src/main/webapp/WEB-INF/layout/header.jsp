@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <header>
-    <div id="header-sticky" class="pb-3">'
+    <div id="header-sticky">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3">

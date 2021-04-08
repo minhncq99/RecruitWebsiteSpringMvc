@@ -9,6 +9,4 @@ import com.java.pojo.Career;
  */
 public interface CareerRepository {
     List<Career> getCareers();
-    
-    
 }

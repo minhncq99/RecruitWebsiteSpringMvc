@@ -7,6 +7,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<tiles:insertAttribute name="banner" />
 <h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+<h2>${message}</h2>
+
 
