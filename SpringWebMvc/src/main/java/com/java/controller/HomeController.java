@@ -22,6 +22,7 @@ public class HomeController {
     
     @RequestMapping("/")
     public String index(Model model) {
+        model.addAttribute("cssfile", "index");
         model.addAttribute("message", "Message");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());

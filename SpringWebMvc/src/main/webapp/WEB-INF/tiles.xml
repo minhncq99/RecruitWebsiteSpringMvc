@@ -6,13 +6,19 @@
     <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="banner" value="" />
         <put-attribute name="content" value="" />
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
     </definition>
     
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang Chủ" />
-        <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
         <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
+    </definition>
+    
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
     </definition>
 </tiles-definitions>
