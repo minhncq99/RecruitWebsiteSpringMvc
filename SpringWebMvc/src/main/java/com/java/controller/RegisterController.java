@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author minh
  */
 @Controller
-public class HomeController {
+@RequestMapping("/register")
+public class RegisterController {
     
     @Autowired
     private CareerService careerService;
@@ -21,10 +22,10 @@ public class HomeController {
     private WorkLocationService workLocationService;
     
     @RequestMapping("/")
-    public String index(Model model) {
-        model.addAttribute("cssfile", "index");
+    public String register(Model model) {
+        model.addAttribute("cssfile", "register");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());
-        return "index";
+        return "register";
     }
 }

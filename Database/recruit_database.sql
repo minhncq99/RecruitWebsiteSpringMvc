@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: javadb
+-- Host: 127.0.0.1    Database: recruitdb
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `applicant`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `applicant` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `gender` tinyint DEFAULT NULL,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `phone_number` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `experiance` int DEFAULT NULL,
   `career_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `career`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `career` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -110,21 +110,17 @@ DROP TABLE IF EXISTS `employer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employer` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `user_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `gender` tinyint DEFAULT NULL,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `phone_number` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `position_id` int NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `location_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_UNIQUE` (`user_name`),
-  KEY `fk_employer_position_idx` (`position_id`),
   KEY `fk_employer_location_idx` (`location_id`),
-  CONSTRAINT `fk_employer_location` FOREIGN KEY (`location_id`) REFERENCES `work_location` (`id`),
-  CONSTRAINT `fk_employer_position` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`)
+  CONSTRAINT `fk_employer_location` FOREIGN KEY (`location_id`) REFERENCES `work_location` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -172,7 +168,7 @@ DROP TABLE IF EXISTS `position`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `position` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -199,10 +195,10 @@ CREATE TABLE `recruitment_news` (
   `id` int NOT NULL AUTO_INCREMENT,
   `salary` int DEFAULT NULL,
   `experience` int DEFAULT NULL,
-  `level` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `level` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `number_of_recruitment` int DEFAULT NULL,
   `gender` tinyint DEFAULT NULL,
-  `time` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `position_id` int DEFAULT NULL,
   `work_location_id` int NOT NULL,
   `career_id` int NOT NULL,
@@ -239,7 +235,7 @@ DROP TABLE IF EXISTS `work_location`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `work_location` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -263,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-07  9:55:19
+-- Dump completed on 2021-04-09 12:57:30

@@ -18,8 +18,8 @@
                      src="<c:url value="/resources/images/user.png" />" 
                      alt="logo">
             </div>
-            <input class="form-control" type="text" name="login" placeholder="Tên đăng nhập">
-            <input class="form-control" type="password"  name="login" placeholder="Mật khẩu">
+            <input class="form-control" type="text" placeholder="Tên đăng nhập">
+            <input class="form-control" type="password"  placeholder="Mật khẩu">
             <input class="form-control btn btn-success" type="submit" value="Đăng Nhập">
         </form>
         <form id="manager" method="POST">
@@ -28,8 +28,8 @@
                      src="<c:url value="/resources/images/manager.png" />" 
                      alt="logo">
             </div>
-            <input class="form-control" type="text" name="login" placeholder="Tên đăng nhập">
-            <input class="form-control" type="password"  name="login" placeholder="Mật khẩu">
+            <input class="form-control" type="text" placeholder="Tên đăng nhập">
+            <input class="form-control" type="password" placeholder="Mật khẩu">
             <input class="form-control btn btn-success" type="submit" value="Đăng Nhập">
         </form>
         <div>

@@ -40,7 +40,7 @@
                     </nav>
                 </div>
                 <div class="col-lg-3 d-flex justify-content-end">
-                    <a href="<c:url value="/" />" class="btn btn-primary mr-1">Đăng ký</a>
+                    <a href="<c:url value="/register/" />" class="btn btn-primary mr-1">Đăng ký</a>
                     <a href="<c:url value="/login/"/>" class="btn btn-outline-primary">Đăng nhập</a>
                 </div>
             </div>

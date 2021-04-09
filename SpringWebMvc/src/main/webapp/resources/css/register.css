@@ -1,53 +1,47 @@
 /* 
-    Created on : Apr 9, 2021, 9:06:14 AM
+    Created on : Apr 9, 2021, 11:20:34 AM
     Author     : minh
 */
-#login-container {
+#register-container {
     width: 100%;
-    height: 500px;
+    padding: 5% 0;
 }
-#login-block {
+#register-block {
     width: 40%;
-    height: 80%;
     margin: auto;
-    transform: translate(0, 10%);
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 20px 60px 0 rgba(0,0,0,0.3);
 }
-#login-block > div:first-child {
+#register-block > div:first-child {
     margin: 0;
-    height: 15%;
     border: 5px 5px 0 0;
 }
-#login-block div:first-child p {
+#register-block div:first-child p {
     color: white;
     cursor: pointer;
     text-align: center;
     padding-top: 5px;
     outline-color: white;
 }
-#login-block div:first-child p:first-child {
+#register-block div:first-child p:first-child {
     border-radius: 0;
     border-top-left-radius: 3px;
 }
-#login-block div:first-child p:last-child {
+#register-block div:first-child p:last-child {
     border-radius: 0;
     border-top-right-radius: 3px;
 }
-#login-block form {
+#register-block form {
     width: 80%;
-    height: 75%;
     margin: auto;
 }
-#login-block form input:not(:last-child) {
+.form-control:not(.btn) {
     background-color: rgb(246,246,246);
-    margin: 15px 0;
-    padding: 10px;
 }
-#login-block div:last-child {
+#register-block > div:last-child {
     text-align: center;
-    padding-top: 10px;
-    height: 10%;
+    margin-top: 10px; 
+    padding: 10px 0 5px;
     background-color: rgb(246,246,246);
 }
