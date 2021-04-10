@@ -10,23 +10,25 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
-            <h2>Logo</h2>
-            <div>
+            <div style="margin-top: 20px">
                 <form action="/action_page.php">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-                    <label for="country">Country</label>
-                    <select id="country" name="country">
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                        <option value="usa">USA</option>
-                    </select>
-
-                    <input type="submit" value="Submit">
+                    <h6>Tìm công việc phù hợp</h6>
+                        <input type="text" class="form-control" placeholder="Tìm kiếm công việc">
+                    <h6>Ngành nghề</h6>
+                        <select class="form-control">Ngành nghề
+                            <option selected>Chọn ngành nghề</option>
+                            <c:forEach items="${careers}" var="c">
+                                <option value="${c.id}">${c.name}</option>
+                            </c:forEach>
+                        </select>
+                    <h6>Tỉnh thành</h6>
+                        <select class="form-control">
+                            <option selected>Chọn tỉnh thành</option>
+                            <c:forEach items="${locations}" var="l">
+                                <option value="${l.id}">${l.name}</option>
+                            </c:forEach>
+                        </select>
+                    <button type="submit" class="form-control btn btn-success">Tìm kiếm</button>
                 </form>
             </div>
         </div>
