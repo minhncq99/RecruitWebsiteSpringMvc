@@ -123,7 +123,7 @@
             <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
         </form>
         <div>
-            <a href="#">Đã có tài khoản</a>
+            <a href="<c:url value="/login/"/>">Đã có tài khoản</a>
         </div>
     </div>
 </div>

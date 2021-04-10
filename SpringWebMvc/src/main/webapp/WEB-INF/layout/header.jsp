@@ -28,7 +28,7 @@
                                 <a class="nav-link" href="<c:url value="/" />">Tìm việc</a>
                             </li>
                             <li>
-                                <a class="nav-link" href="<c:url value="/" />">Công ty</a>
+                                <a class="nav-link" href="<c:url value="/company/" />">Công ty</a>
                             </li>
                             <li>
                                 <a class="nav-link" href="<c:url value="/" />">Đăng tin</a>

@@ -26,4 +26,9 @@
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
     </definition>
+    
+    <definition name="company" extends="baseLayout">
+        <put-attribute name="title" value="Company" />
+        <put-attribute name="content" value="/WEB-INF/jsp/company.jsp" />
+    </definition>
 </tiles-definitions>
