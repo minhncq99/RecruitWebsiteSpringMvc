@@ -31,4 +31,9 @@
         <put-attribute name="title" value="Company" />
         <put-attribute name="content" value="/WEB-INF/jsp/company.jsp" />
     </definition>
+   
+    <definition name="profile" extends="baseLayout">
+        <put-attribute name="title" value="Profile" />
+        <put-attribute name="content" value="/WEB-INF/jsp/profile.jsp" />
+    </definition> 
 </tiles-definitions>
