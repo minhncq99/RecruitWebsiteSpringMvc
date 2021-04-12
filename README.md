@@ -1,9 +1,10 @@
 # RecruitWebsiteSpringMvc
 
 A recruitment website that uses Spring MVC.
+
 The project used Apache NetBeans to code.
 
-how to install
+How to install
 1. `git clone https://github.com/minhncq99/RecruitWebsiteSpringMvc.git`
 2. `cd SpringWebMvc`
 3. import database `Database` in MySql
