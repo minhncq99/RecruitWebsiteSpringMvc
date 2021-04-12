@@ -74,7 +74,7 @@ body {
 /* Styling of other elements */
 .header-logo img {
 	display: block;
-	height: calc(var(--header-inner-height) - 30px);
+    height: calc(var(--header-inner-height) - -15px);
 }
 
 .header-navigation {
@@ -203,6 +203,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+	position: absolute;
+	z-index: -1;   
  }
 #banner-model {
     color: white;
@@ -213,6 +215,10 @@ body {
     transform: translate(0, 50%);
     padding: 30px 40px;
     border-radius: 3px;
+}
+#banner-model form::after {
+	display: block;
+	position: relative;
 }
 #banner-model form{
     width: 80%;
