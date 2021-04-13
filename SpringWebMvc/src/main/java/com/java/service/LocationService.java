@@ -5,13 +5,13 @@
  */
 package com.java.service;
 
-import com.java.pojo.WorkLocation;
+import com.java.pojo.Location;
 import java.util.List;
 
 /**
  *
  * @author minhz
  */
-public interface WorkLocationService {
-    List<WorkLocation> getLocations();
+public interface LocationService {
+    List<Location> getLocations();
 }

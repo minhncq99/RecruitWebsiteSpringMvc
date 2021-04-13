@@ -1,23 +1,23 @@
 package com.java.service.impl;
 
-import com.java.pojo.WorkLocation;
-import com.java.repository.WorkLocationRepository;
-import com.java.service.WorkLocationService;
+import com.java.pojo.Location;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.java.repository.LocationRepository;
+import com.java.service.LocationService;
 
 /**
  *
  * @author minh
  */
 @Service
-public class WorkLocationServiceImpl implements WorkLocationService{
+public class LocationServiceImpl implements LocationService{
     @Autowired
-    private WorkLocationRepository locationRepository;
+    private LocationRepository locationRepository;
     
     @Override
-    public List<WorkLocation> getLocations() {
+    public List<Location> getLocations() {
         return this.locationRepository.getLocations();
     }
     
