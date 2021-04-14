@@ -166,7 +166,6 @@
             
         </div>    
     </div>
-    </div>
 </div>
 <script src="<c:url value="/resources/js/company.js"/>"></script>
 

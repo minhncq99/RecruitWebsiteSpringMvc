@@ -10,7 +10,7 @@
 <header class="header-outer">
 	<div class="header-inner responsive-wrapper">
 		<div class="header-logo">
-			<img src="<c:url value="/resources/images/logo.png" />" alt="logo">
+			<img src="<c:url value="/resources/images/logo.png" />" alt="logo" width="55%">
 		</div>
 		<nav class="header-navigation">
                     <a class="nav-link" href="<c:url value="/" />">Trang chủ</a>

@@ -15,7 +15,7 @@ body {
     font-family: "DM Sans", sans-serif;
 	/* background-color: #f2f5f7; */
 	line-height: 1.5;
-	min-height: 300vh;
+	/* min-height: 300vh; */
 	position: relative;
     z-index: -1;
 }
@@ -74,7 +74,7 @@ body {
 /* Styling of other elements */
 .header-logo img {
 	display: block;
-    height: calc(var(--header-inner-height) - -15px);
+    height: calc(var(--header-inner-height) - 30x);
 }
 
 .header-navigation {
@@ -171,32 +171,7 @@ body {
 	}
 }
 
-/*--- Footer ----*/
-.footers a {color:#696969;}
-.footers p {color:#696969;}
-.footers ul {line-height:30px;}
-#social-fb:hover {
-     color: #3B5998;
-     transition:all .001s;
- }
- #social-tw:hover {
-     color: #4099FF;
-     transition:all .001s;
- }
- #social-gp:hover {
-     color: #d34836;
-     transition:all .001s;
- }
- #social-em:hover {
-     color: #f39c12;
-     transition:all .001s;
- }
- #social-github:hover {
-     color: black;
-     transition:all .001s;
- }
- 
- /*--- Banner ----*/
+ /*--------------------- Banner ------------------*/
  #banner {
     width: 100%;
     height: 400px;
@@ -230,3 +205,63 @@ body {
 .form-control {
     border-radius: 2px;
 }
+
+/*--------------------------- Footer -----------------------*/
+/* .footers a {color:#696969;}
+.footers p {color:#696969;}
+.footers ul {line-height:30px;}
+#social-fb:hover {
+     color: #3B5998;
+     transition:all .001s;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+     transition:all .001s;
+ }
+ #social-gp:hover {
+     color: #d34836;
+     transition:all .001s;
+ }
+ #social-em:hover {
+     color: #f39c12;
+     transition:all .001s;
+ }
+ #social-github:hover {
+     color: black;
+     transition:all .001s;
+ }
+  */
+
+
+  /* Content slide of index - serrvices -------------------------------------------------------- */
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .logo-small {
+    font-size: 50px;
+  }
+  .logo {
+    font-size: 200px;
+  }
+  .thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .slideanim {
+	  z-index: -1;
+	  position: relative;
+}
+#tour {
+	z-index: -1;
+	position: relative;
+}
+
