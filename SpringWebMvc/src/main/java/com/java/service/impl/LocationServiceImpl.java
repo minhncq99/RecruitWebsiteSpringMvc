@@ -20,5 +20,10 @@ public class LocationServiceImpl implements LocationService{
     public List<Location> getLocations() {
         return this.locationRepository.getLocations();
     }
+
+    @Override
+    public Location getLocationById(int id) {
+        return this.locationRepository.getLocationById(id);
+    }
     
 }

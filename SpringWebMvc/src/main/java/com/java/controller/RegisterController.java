@@ -1,16 +1,16 @@
 package com.java.controller;
 
 import com.java.pojo.EmployerRegisterForm;
-import com.java.pojo.User;
 import com.java.service.CareerService;
+import com.java.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.java.service.LocationService;
-import com.java.service.UserService;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author minh
  */
 @Controller
+@ControllerAdvice
 @RequestMapping("/register")
 public class RegisterController {
 
@@ -27,34 +28,33 @@ public class RegisterController {
     @Autowired
     private LocationService workLocationService;
     @Autowired
-    private UserService userService;
+    private EmployerService employerService;
 
-    @RequestMapping("/")
-    public String register(Model model) {
+    @ModelAttribute
+    public void addModalAtribute(Model model) {
         model.addAttribute("cssfile", "register");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());
         model.addAttribute("employer", new EmployerRegisterForm());
         model.addAttribute("register_employer", "/register/emp");
-        model.addAttribute("user", userService.getUsers("minh"));
+    }
+    
+    @RequestMapping("/")
+    public String register(Model model) {
+        
         return "register";
     }
 
     @PostMapping(value = "/emp")
-    public String employerRegister(Model model,
+    public String employerRegister(Model model, 
             @Valid @ModelAttribute(value = "employer") EmployerRegisterForm employer,
             BindingResult result) {
-        if (result.hasErrors()) {
+        if (result.hasErrors()) 
+            return "register";
+        boolean a = !this.employerService.addEmployer(employer);
+        if (a) {
             return "register";
         }
-        User user = new User();
-        user.setUserName(employer.getUserName());
-        user.setPassword(employer.getPassword());
-        user.setName(employer.getName());
-        user.setEmail(employer.getEmail());
-        user.setRole("ROLE_EMPLOYER");
-        
-        userService.addUser(user);
         return "redirect:/";
     }
 }

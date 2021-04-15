@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.java.service;
 
 import com.java.pojo.Location;
@@ -10,8 +5,9 @@ import java.util.List;
 
 /**
  *
- * @author minhz
+ * @author minh
  */
 public interface LocationService {
     List<Location> getLocations();
+    Location getLocationById(int id);
 }

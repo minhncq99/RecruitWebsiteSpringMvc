@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface LocationRepository {
     List<Location> getLocations();
+    
+    Location getLocationById(int id);
 }

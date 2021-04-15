@@ -2,7 +2,6 @@ package com.java.repository.impl;
 
 import com.java.pojo.Location;
 import java.util.List;
-import javax.persistence.Transient;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import com.java.repository.LocationRepository;
+import javax.persistence.criteria.Predicate;
 
 /**
  *
@@ -39,5 +39,22 @@ public class LocationRepositoryImpl implements LocationRepository{
         
         return query.getResultList();
     }
-    
+
+    @Override
+    @Transactional
+    public Location getLocationById(int locationId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Location> query = builder.createQuery(Location.class);
+        Root<Location> root = query.from(Location.class);
+        query = query.select(root);
+        
+        Predicate predicate = builder.equal(root.get("id").as(Integer.class), locationId);
+        query.where(predicate);
+        
+        Query result = session.createQuery(query);
+        
+        return (Location) result.getResultList().get(0);
+    }
 }
