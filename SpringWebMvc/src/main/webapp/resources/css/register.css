@@ -24,11 +24,11 @@
     padding-top: 5px;
     outline-color: white;
 }
-#register-block div:first-child p:first-child {
+#register-block div:first-child a:first-child {
     border-radius: 0;
     border-top-left-radius: 3px;
 }
-#register-block div:first-child p:last-child {
+#register-block div:first-child a:last-child {
     border-radius: 0;
     border-top-right-radius: 3px;
 }
