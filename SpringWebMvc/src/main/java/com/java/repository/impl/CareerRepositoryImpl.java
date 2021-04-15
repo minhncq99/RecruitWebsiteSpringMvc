@@ -5,6 +5,7 @@ import com.java.repository.CareerRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -36,5 +37,20 @@ public class CareerRepositoryImpl implements CareerRepository{
         
         return query.getResultList();
     }
-    
+
+    @Override
+    @Transactional
+    public Career getCareerById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Career> query = builder.createQuery(Career.class);
+        Root<Career> root = query.from(Career.class);
+        
+        Predicate predicate = builder.equal(root.get("id").as(Integer.class), id);
+        query = query.where(predicate);
+        
+        Query result = session.createQuery(query);
+        return (Career) result.getResultList().get(0);
+    }
 }

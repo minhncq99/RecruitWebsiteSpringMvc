@@ -20,5 +20,9 @@ public class CareerServiceImpl implements CareerService{
     public List<Career> getCareers() {
         return this.careerRepository.getCareers();
     }
-    
+
+    @Override
+    public Career getCareerById(int id) {
+        return this.careerRepository.getCareerById(id);
+    }
 }
