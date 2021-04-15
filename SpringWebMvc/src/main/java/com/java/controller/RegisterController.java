@@ -1,6 +1,8 @@
 package com.java.controller;
 
+import com.java.pojo.ApplicantRegisterForm;
 import com.java.pojo.EmployerRegisterForm;
+import com.java.service.ApplicantService;
 import com.java.service.CareerService;
 import com.java.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -29,6 +32,8 @@ public class RegisterController {
     private LocationService workLocationService;
     @Autowired
     private EmployerService employerService;
+    @Autowired
+    private ApplicantService applicantService;
 
     @ModelAttribute
     public void addModalAtribute(Model model) {
@@ -37,22 +42,40 @@ public class RegisterController {
         model.addAttribute("locations", workLocationService.getLocations());
         model.addAttribute("employer", new EmployerRegisterForm());
         model.addAttribute("register_employer", "/register/emp");
+        model.addAttribute("applicant", new ApplicantRegisterForm());
+        model.addAttribute("register_applicant", "/register/app");
     }
     
-    @RequestMapping("/")
-    public String register(Model model) {
-        
+    @RequestMapping({"/","/{form}"})
+    public String register(@PathVariable(required = false) String form , Model model) {
+        if (form != null && form.equals("empl")) {
+            model.addAttribute("form", "empl");
+        } else {
+            model.addAttribute("form", null);
+        }
         return "register";
     }
 
-    @PostMapping(value = "/emp")
+    @PostMapping("/emp")
     public String employerRegister(Model model, 
             @Valid @ModelAttribute(value = "employer") EmployerRegisterForm employer,
             BindingResult result) {
         if (result.hasErrors()) 
             return "register";
-        boolean a = !this.employerService.addEmployer(employer);
-        if (a) {
+        if (!this.employerService.addEmployer(employer)) {
+            return "register";
+        }
+        return "redirect:/";
+    }
+    
+    @PostMapping("/app")
+    public String applicantRegister(Model model, 
+                @Valid @ModelAttribute(value = "applicant") ApplicantRegisterForm applicant,
+            BindingResult result) {
+        if(result.hasErrors()) {
+            return "register";
+        }
+        if (!this.applicantService.addApplicant(applicant)) {
             return "register";
         }
         return "redirect:/";

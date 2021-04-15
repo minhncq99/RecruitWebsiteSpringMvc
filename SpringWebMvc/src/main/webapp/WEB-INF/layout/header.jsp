@@ -39,20 +39,26 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3 d-flex justify-content-end">
+                <div class="col-lg-3 d-flex justify-content-center">
                     <c:choose>
                         <c:when test="${pageContext.request.userPrincipal.name == null}">
                             <a href="<c:url value="/register/" />" class="btn btn-primary mr-1">Đăng ký</a>
                             <a href="<c:url value="/login/"/>" class="btn btn-outline-primary">Đăng nhập</a>
                         </c:when>
                         <c:when test="${pageContext.request.userPrincipal.name != null}">
-                            <a class="nav-link" href="#">${pageContext.request.userPrincipal.name}</a>
-                            <a class="nav-link" href="<c:url value="/logout" />">
-                               Dang xuat
-                            </a>
+                            <div class="dropdown show">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${pageContext.request.userPrincipal.name}
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <a class="dropdown-item" href="#">Trang cá nhân</a>
+                                  <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                                  <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
+                                </div>
+                            </div>
                         </c:when>
                     </c:choose>
-                    
                 </div>
             </div>
         </div>
