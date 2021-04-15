@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!--<footer class="text-center">
+<footer class="text-center">
     <section class="footers bg-light pt-5 pb-3">
         <div class="container pt-5">
             <div class="row">
@@ -51,4 +51,4 @@
             </div>
         </div>
     </section>
-</footer>-->
+</footer>

@@ -40,8 +40,19 @@
                     </nav>
                 </div>
                 <div class="col-lg-3 d-flex justify-content-end">
-                    <a href="<c:url value="/register/" />" class="btn btn-primary mr-1">Đăng ký</a>
-                    <a href="<c:url value="/login/"/>" class="btn btn-outline-primary">Đăng nhập</a>
+                    <c:choose>
+                        <c:when test="${pageContext.request.userPrincipal.name == null}">
+                            <a href="<c:url value="/register/" />" class="btn btn-primary mr-1">Đăng ký</a>
+                            <a href="<c:url value="/login/"/>" class="btn btn-outline-primary">Đăng nhập</a>
+                        </c:when>
+                        <c:when test="${pageContext.request.userPrincipal.name != null}">
+                            <a class="nav-link" href="#">${pageContext.request.userPrincipal.name}</a>
+                            <a class="nav-link" href="<c:url value="/logout" />">
+                               Dang xuat
+                            </a>
+                        </c:when>
+                    </c:choose>
+                    
                 </div>
             </div>
         </div>

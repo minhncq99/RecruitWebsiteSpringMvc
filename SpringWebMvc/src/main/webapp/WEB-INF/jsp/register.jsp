@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container" id="register-container">
@@ -77,51 +78,48 @@
             </div>
             <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
         </form>
-        <form id="manager" method="POST">
+        <form:form id="manager" method="POST" action="/SpringWebMvc${register_employer}/" modelAttribute="employer">
             <div class="row justify-content-around">
                 <img height="120px" width="120px" 
                      src="<c:url value="/resources/images/manager.png" />" 
                      alt="logo">
             </div>
+            <form:errors path="*" element="div" />
             <div class="form-group">
-                <label for="manager_username">Tên đăng nhập</label>
-                <input id="manager_username" class="form-control" type="text">
+                <form:label path="userName">Tên đăng nhập</form:label>
+                <form:input path="userName" cssClass="form-control" type="text"/>
             </div>
             <div class="form-group">
-                <label for="manager_password">Mật Khẩu</label>
-                <input id="manager_password" class="form-control" type="password">
+                <form:label path="password">Mật Khẩu</form:label>
+                <form:input path="password" cssClass="form-control" type="password" />
             </div>
             <div class="form-group">
-                <label for="manager_repassword">Nhập lại mật khẩu</label>
-                <input id="manager_repassword" class="form-control" type="password">
+                <form:label path="rePassword">Nhập lại mật khẩu</form:label>
+                <form:input path="rePassword" cssClass="form-control" type="password" />
             </div>
             <div class="form-group">
-                <label for="manager_name">Tên công ty</label>
-                <input id="manager_name" class="form-control" type="text">
+                <form:label path="name">Tên công ty</form:label>
+                <form:input path="name" cssClass="form-control" type="text"/>
             </div>
             <div class="form-group">
-                <label for="manager_phone">Số điện thoại công ty</label>
-                <input id="manager_phone" type="text" class="form-control">
+                <form:label path="email">Địa chỉ email</form:label>
+                <form:input path="email" cssClass="form-control" type="text"/>
             </div>
             <div class="form-group">
-                <label for="manager_email">Địa chỉ email</label>
-                <input id="manager_email" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="manager_location">Nơi làm việc</label>
-                <select id="manager_gender" class="form-control">
-                    <option selected></option>
+                <form:label path="location_id">Nơi làm việc</form:label>
+                <form:select path="location_id" cssClass="form-control" type="number">
                     <c:forEach items="${locations}" var="l">
-                        <option value="${l.id}">${l.name}</option>
+                        <form:option value="${l.id}" label="${l.name}"/>
                     </c:forEach>
-                </select>
+                </form:select>
             </div>
-            <div class="form-group">
-                <label for="manager_description">Mô tả về công ty</label>
-                <textarea id="manager_description" class="form-control" rows="3"></textarea>
+                <div class="form-group">
+                <form:label path="description">Mô tả về công ty</form:label>
+                <form:textarea path="description" cssClass="form-control" rows="3" />
             </div>
+
             <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
-        </form>
+        </form:form>
         <div>
             <a href="<c:url value="/login/"/>">Đã có tài khoản</a>
         </div>

@@ -6,11 +6,11 @@
 package com.java.controller;
 
 import com.java.service.CareerService;
-import com.java.service.WorkLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.java.service.LocationService;
 
 /**
  *
@@ -24,7 +24,7 @@ public class CompanyController {
     private CareerService careerService;
     
     @Autowired
-    private WorkLocationService workLocationService;
+    private LocationService workLocationService;
     
     
     @RequestMapping("/")

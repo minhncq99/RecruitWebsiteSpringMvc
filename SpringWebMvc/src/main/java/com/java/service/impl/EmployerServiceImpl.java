@@ -1,0 +1,24 @@
+package com.java.service.impl;
+
+import com.java.pojo.EmployerRegisterForm;
+import com.java.repository.EmployerRepository;
+import com.java.service.EmployerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author minh
+ */
+@Service
+public class EmployerServiceImpl implements EmployerService{
+
+    @Autowired
+    private EmployerRepository employerRepository;
+    
+    @Override
+    public boolean addEmployer(EmployerRegisterForm employerRegister) {
+        return this.employerRepository.addEmployer(employerRegister);
+    }
+    
+}

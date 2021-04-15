@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: recruitdb
+-- Host: 127.0.0.1    Database: javatest
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -24,19 +24,16 @@ DROP TABLE IF EXISTS `applicant`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `applicant` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `gender` tinyint DEFAULT NULL,
-  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `experiance` int DEFAULT NULL,
+  `gender` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiance` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
   `career_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
-  KEY `fk_applicant_career_idx` (`career_id`),
-  CONSTRAINT `fk_applicant_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`)
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  KEY `applicant_career_idx` (`career_id`),
+  CONSTRAINT `applicant_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
+  CONSTRAINT `applicant_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,30 +47,33 @@ LOCK TABLES `applicant` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `applicant_employer`
+-- Table structure for table `applicant_news`
 --
 
-DROP TABLE IF EXISTS `applicant_employer`;
+DROP TABLE IF EXISTS `applicant_news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `applicant_employer` (
+CREATE TABLE `applicant_news` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `applicant_id` int NOT NULL,
-  `employer_id` int NOT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`applicant_id`,`employer_id`),
-  KEY `fk_employer_idx` (`employer_id`),
-  CONSTRAINT `fk_applicant_table` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`),
-  CONSTRAINT `fk_employer_table` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`)
+  `news_id` int NOT NULL,
+  `date` datetime NOT NULL,
+  `state` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `applicant_news_newsid_idx` (`news_id`),
+  KEY `applicant_news_applicantid_idx` (`applicant_id`),
+  CONSTRAINT `applicant_news_applicantid` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`),
+  CONSTRAINT `applicant_news_newsid` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `applicant_employer`
+-- Dumping data for table `applicant_news`
 --
 
-LOCK TABLES `applicant_employer` WRITE;
-/*!40000 ALTER TABLE `applicant_employer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `applicant_employer` ENABLE KEYS */;
+LOCK TABLES `applicant_news` WRITE;
+/*!40000 ALTER TABLE `applicant_news` DISABLE KEYS */;
+/*!40000 ALTER TABLE `applicant_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `career`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `career` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -110,17 +110,14 @@ DROP TABLE IF EXISTS `employer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employer` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
   `location_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
-  KEY `fk_employer_location_idx` (`location_id`),
-  CONSTRAINT `fk_employer_location` FOREIGN KEY (`location_id`) REFERENCES `work_location` (`id`)
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  KEY `employer_location_idx` (`location_id`),
+  CONSTRAINT `employer_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `employer_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,120 +131,95 @@ LOCK TABLES `employer` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `employer_career`
+-- Table structure for table `location`
 --
 
-DROP TABLE IF EXISTS `employer_career`;
+DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employer_career` (
-  `employer_id` int NOT NULL,
-  `career_id` int NOT NULL,
-  PRIMARY KEY (`career_id`,`employer_id`),
-  KEY `fk_employer_idx` (`employer_id`),
-  CONSTRAINT `fk_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
-  CONSTRAINT `fk_employer` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employer_career`
---
-
-LOCK TABLES `employer_career` WRITE;
-/*!40000 ALTER TABLE `employer_career` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employer_career` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `position`
---
-
-DROP TABLE IF EXISTS `position`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `position` (
+CREATE TABLE `location` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`,`name`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `position`
---
-
-LOCK TABLES `position` WRITE;
-/*!40000 ALTER TABLE `position` DISABLE KEYS */;
-INSERT INTO `position` VALUES (6,'Giám đốc'),(1,'Nhân viên'),(5,'Phó giám đốc'),(3,'Phó phòng'),(7,'Tổng giám đốc'),(2,'Trưởng nhóm'),(4,'Trưởng phòng');
-/*!40000 ALTER TABLE `position` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `recruitment_news`
---
-
-DROP TABLE IF EXISTS `recruitment_news`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recruitment_news` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `salary` int DEFAULT NULL,
-  `experience` int DEFAULT NULL,
-  `level` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `number_of_recruitment` int DEFAULT NULL,
-  `gender` tinyint DEFAULT NULL,
-  `time` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `position_id` int DEFAULT NULL,
-  `work_location_id` int NOT NULL,
-  `career_id` int NOT NULL,
-  `employer_id` int NOT NULL,
-  `posting_date` datetime NOT NULL,
-  `closing_date` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_position_news_idx` (`position_id`),
-  KEY `fk_news_work_location_idx` (`work_location_id`),
-  KEY `fk_news_career_idx` (`career_id`),
-  KEY `fk_news_employer_idx` (`employer_id`),
-  CONSTRAINT `fk_news_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
-  CONSTRAINT `fk_news_employer` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`),
-  CONSTRAINT `fk_news_position` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
-  CONSTRAINT `fk_news_work_location` FOREIGN KEY (`work_location_id`) REFERENCES `work_location` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `recruitment_news`
---
-
-LOCK TABLES `recruitment_news` WRITE;
-/*!40000 ALTER TABLE `recruitment_news` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recruitment_news` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `work_location`
---
-
-DROP TABLE IF EXISTS `work_location`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `work_location` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `work_location`
+-- Dumping data for table `location`
 --
 
-LOCK TABLES `work_location` WRITE;
-/*!40000 ALTER TABLE `work_location` DISABLE KEYS */;
-INSERT INTO `work_location` VALUES (1,'Hà Nội'),(2,'Hồ Chí Minh'),(3,'Bình Dương'),(4,'Bắc Ninh'),(5,'Đồng Nai'),(6,'Hưng Yên'),(7,'Hải Dương'),(8,'Đà Nẵng'),(9,'Hải Phòng'),(10,'An Giang'),(11,'Bà Rịa-Vũng Tàu'),(12,'Bắc Giang'),(13,'Bạc Liêu'),(14,'Bến Tre'),(15,'Bình Định'),(16,'Bình Phước'),(17,'Bình Thuận'),(18,'Cà Mau'),(19,'Cần Thơ'),(20,'Cao Bằng'),(21,'Cửu Long'),(22,'Đắc Lắc'),(23,'Đắc Nông'),(24,'Điện Biên'),(25,'Đồng Tháp'),(26,'Gia Lai'),(27,'Hà Giang'),(28,'Hà Nam'),(29,'Hà Tĩnh'),(30,'Hậu Giang'),(31,'Hoà Bình'),(32,'Khánh Hoà'),(33,'Kiên Giang'),(34,'Kon Tum'),(35,'Lai Châu'),(36,'Lâm Đồng'),(37,'Lạng Sơn'),(38,'Lào Cai'),(39,'Long An'),(40,'Nam Định'),(41,'Nghệ An'),(42,'Ninh Bình'),(43,'Ninh Thuận'),(44,'Phú Thọ'),(45,'Phú Yên'),(46,'Quảng Bình'),(47,'Quảng Nam'),(48,'Quảng Ngãi'),(49,'Quảng Ninh'),(50,'Quảng Trị'),(51,'Sóc Trăng'),(52,'Sơn La'),(53,'Tây Ninh'),(54,'Thái Bình'),(55,'Thái Nguyên'),(56,'Thanh Hoá'),(57,'Thừa Thiên Huế'),(58,'Tiền Giang'),(59,'Trà Vinh'),(60,'Tuyên Quang'),(61,'Vĩnh Long'),(62,'Vĩnh Phúc'),(63,'Yên Bái'),(64,'Nước Ngoài');
-/*!40000 ALTER TABLE `work_location` ENABLE KEYS */;
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (10,'An Giang'),(11,'Bà Rịa-Vũng Tàu'),(12,'Bắc Giang'),(13,'Bạc Liêu'),(4,'Bắc Ninh'),(14,'Bến Tre'),(3,'Bình Dương'),(15,'Bình Định'),(16,'Bình Phước'),(17,'Bình Thuận'),(18,'Cà Mau'),(19,'Cần Thơ'),(20,'Cao Bằng'),(21,'Cửu Long'),(8,'Đà Nẵng'),(22,'Đắc Lắc'),(23,'Đắc Nông'),(24,'Điện Biên'),(5,'Đồng Nai'),(25,'Đồng Tháp'),(26,'Gia Lai'),(27,'Hà Giang'),(28,'Hà Nam'),(1,'Hà Nội'),(29,'Hà Tĩnh'),(7,'Hải Dương'),(9,'Hải Phòng'),(30,'Hậu Giang'),(2,'Hồ Chí Minh'),(31,'Hoà Bình'),(6,'Hưng Yên'),(32,'Khánh Hoà'),(33,'Kiên Giang'),(34,'Kon Tum'),(35,'Lai Châu'),(36,'Lâm Đồng'),(37,'Lạng Sơn'),(38,'Lào Cai'),(39,'Long An'),(40,'Nam Định'),(41,'Nghệ An'),(42,'Ninh Bình'),(43,'Ninh Thuận'),(64,'Nước Ngoài'),(44,'Phú Thọ'),(45,'Phú Yên'),(46,'Quảng Bình'),(47,'Quảng Nam'),(48,'Quảng Ngãi'),(49,'Quảng Ninh'),(50,'Quảng Trị'),(51,'Sóc Trăng'),(52,'Sơn La'),(53,'Tây Ninh'),(54,'Thái Bình'),(55,'Thái Nguyên'),(56,'Thanh Hoá'),(57,'Thừa Thiên Huế'),(58,'Tiền Giang'),(59,'Trà Vinh'),(60,'Tuyên Quang'),(61,'Vĩnh Long'),(62,'Vĩnh Phúc'),(63,'Yên Bái');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `news` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `salary` int DEFAULT NULL,
+  `experiance` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_working` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
+  `time_start` date NOT NULL,
+  `time_end` date NOT NULL,
+  `employer_id` int NOT NULL,
+  `career_id` int NOT NULL,
+  `location_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `news_location_idx` (`location_id`),
+  KEY `news_career_idx` (`career_id`),
+  KEY `news_employer_idx` (`employer_id`),
+  CONSTRAINT `news_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
+  CONSTRAINT `news_employer` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`),
+  CONSTRAINT `news_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `news`
+--
+
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -259,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-09 12:57:30
+-- Dump completed on 2021-04-13 20:20:14
