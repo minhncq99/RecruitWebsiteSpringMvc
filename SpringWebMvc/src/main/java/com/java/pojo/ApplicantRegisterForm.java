@@ -17,9 +17,12 @@ public class ApplicantRegisterForm {
     private String rePassword;
     @NotNull
     private String email;
+    @NotNull
+    private String name;
     private String role;
     @NotNull
     private String gender;
+    private String description;
     private String experiance;
     @NotNull
     private int careerId;
@@ -56,6 +59,14 @@ public class ApplicantRegisterForm {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public String getRole() {
         return role;
     }
@@ -64,6 +75,14 @@ public class ApplicantRegisterForm {
         this.role = role;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public String getGender() {
         return gender;
     }

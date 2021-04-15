@@ -46,10 +46,9 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         employer.setUser(user);
         employer.setDescription(employerRegister.getDescription());
         Location location = this.locationService.getLocationById(employerRegister.getLocation_id());
-        
         try {
             if (location == null)
-                throw new HibernateException("Không thể tìm thấy mã tỉnh thành!");
+                throw new HibernateException("Không thể tìm thấy tỉnh thành!");
             
             employer.setLocation(location);
             this.userService.addUser(user);
