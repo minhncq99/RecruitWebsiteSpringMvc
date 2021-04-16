@@ -1,5 +1,6 @@
 package com.java.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,7 +22,8 @@ public class EmployerController {
     }
     
     @RequestMapping("/")
-    public String employerPage(Model model) {
+    public String employerPage(Authentication auth, Model model) {
+        model.addAttribute("username", auth.getName()); 
         return "employer";
     }
     
