@@ -4,127 +4,123 @@
     Author     : minh
 --%>
 
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container" id="register-container">
     <div id="register-block" >
         <div class="row w-100" >
-            <p type="button" class="btn btn-primary col-6 active">Ứng viên</p>
-            <p type="button" class="btn btn-primary col-6">Nhà tuyển dụng</p>
+            <a href="<c:url value="/register/" />" type="button" class="btn btn-primary col-6 active">Ứng viên</a>
+            <a href="<c:url value="/register/empl/" />" type="button" class="btn btn-primary col-6">Nhà tuyển dụng</a>
         </div>
-        <form id="user" method="POST">
-            <div class="row justify-content-around">
-                <img height="120px" width="120px" 
-                     src="<c:url value="/resources/images/user.png" />" 
-                     alt="logo">
-            </div>
-            <div class="form-group">
-                <label for="user_username">Tên đăng nhập</label>
-                <input id="user_username" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="user_password">Mật Khẩu</label>
-                <input id="user_password" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label for="user_repassword">Nhập lại mật khẩu</label>
-                <input id="user_repassword" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label for="user_name">Họ và tên</label>
-                <input id="user_name" class="form-control" type="text">
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="user_phone">Số điện thoại</label>
-                        <input id="user_phone" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="user_gender">Giới tính</label>
-                        <select id="user_gender" class="form-control">
-                            <option selected></option>
-                            <option value="0">Nam</option>
-                            <option value="1">Nữ</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="user_email">Địa chỉ email</label>
-                <input id="user_email" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="user_career">Ngành nghề</label>
-                <select id="user_career" class="form-control">
-                    <option selected></option>
-                    <c:forEach items="${careers}" var="c">
-                        <option value="${c.id}">${c.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="user_experiance">Trình độ học vấn</label>
-                <input id="user_experiance" class="form-control" type="text">
-            </div>
 
-            <div class="form-group">
-                <label for="user_description">Mô tả về bản thân</label>
-                <textarea id="user_description" class="form-control" rows="3"></textarea>
-            </div>
-            <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
-        </form>
-        <form id="manager" method="POST">
-            <div class="row justify-content-around">
-                <img height="120px" width="120px" 
-                     src="<c:url value="/resources/images/manager.png" />" 
-                     alt="logo">
-            </div>
-            <div class="form-group">
-                <label for="manager_username">Tên đăng nhập</label>
-                <input id="manager_username" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="manager_password">Mật Khẩu</label>
-                <input id="manager_password" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label for="manager_repassword">Nhập lại mật khẩu</label>
-                <input id="manager_repassword" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label for="manager_name">Tên công ty</label>
-                <input id="manager_name" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="manager_phone">Số điện thoại công ty</label>
-                <input id="manager_phone" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="manager_email">Địa chỉ email</label>
-                <input id="manager_email" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="manager_location">Nơi làm việc</label>
-                <select id="manager_gender" class="form-control">
-                    <option selected></option>
-                    <c:forEach items="${locations}" var="l">
-                        <option value="${l.id}">${l.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="manager_description">Mô tả về công ty</label>
-                <textarea id="manager_description" class="form-control" rows="3"></textarea>
-            </div>
-            <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
-        </form>
-        <div>
+        <c:choose>
+            <c:when test="${form == null}">
+                <form:form id="user" method="POST" action="/SpringWebMvc${register_applicant}/" modelAttribute="applicant">
+                    <div class="row justify-content-around">
+                        <img height="120px" width="120px" 
+                             src="<c:url value="/resources/images/user.png" />" 
+                             alt="logo">
+                    </div>
+                    <form:errors path="*" element="div" />
+                    <div class="form-group">
+                        <form:label path="username">Tên đăng nhập</form:label>
+                        <form:input path="username" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="password">Mật Khẩu</form:label>
+                        <form:input path="password" class="form-control" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="rePassword">Nhập lại mật khẩu</form:label>
+                        <form:input path="rePassword" class="form-control" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="name">Họ và tên</form:label>
+                        <form:input path="name" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="gender">Giới tính</form:label>
+                        <form:select path="gender" class="form-control">
+                            <form:option value="" label=""/>
+                            <form:option value="Nam" label="Nam" />
+                            <form:option value="Nữ" label="Nữ" />
+                        </form:select>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="email">Địa chỉ email</form:label>
+                        <form:input path="email" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="careerId">Ngành nghề</form:label>
+                        <form:select path="careerId" class="form-control">
+                            <c:forEach items="${careers}" var="c">
+                                <form:option value="${c.id}" label="${c.name}"/>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="experiance">Trình độ học vấn</form:label>
+                        <form:input path="experiance" class="form-control" type="text"/>
+                    </div>
+
+                    <div class="form-group">
+                        <form:label path="description">Mô tả về bản thân</form:label>
+                        <form:textarea path="description" class="form-control" rows="3" />
+                    </div>
+                    <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
+                </form:form>
+            </c:when>
+            <c:otherwise>
+                <form:form id="manager" method="POST" action="/SpringWebMvc${register_employer}/" modelAttribute="employer">
+                    <div class="row justify-content-around">
+                        <img height="120px" width="120px" 
+                             src="<c:url value="/resources/images/manager.png" />" 
+                             alt="logo">
+                    </div>
+                    <form:errors path="*" element="div" />
+                    <div class="form-group">
+                        <form:label path="userName">Tên đăng nhập</form:label>
+                        <form:input path="userName" cssClass="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="password">Mật Khẩu</form:label>
+                        <form:input path="password" cssClass="form-control" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="rePassword">Nhập lại mật khẩu</form:label>
+                        <form:input path="rePassword" cssClass="form-control" type="password" />
+                    </div>
+                    <div class="form-group">
+                        <form:label path="name">Tên công ty</form:label>
+                        <form:input path="name" cssClass="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="email">Địa chỉ email</form:label>
+                        <form:input path="email" cssClass="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="location_id">Nơi làm việc</form:label>
+                        <form:select path="location_id" cssClass="form-control">
+                            <c:forEach items="${locations}" var="l">
+                                <form:option value="${l.id}" label="${l.name}"/>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+                        <div class="form-group">
+                        <form:label path="description">Mô tả về công ty</form:label>
+                        <form:textarea path="description" cssClass="form-control" rows="3" />
+                    </div>
+
+                    <input class="form-control btn btn-success" type="submit" value="Đăng Ký">
+                </form:form>
+            </c:otherwise>
+        </c:choose>
+        
+        <div class="text-center py-2">
             <a href="<c:url value="/login/"/>">Đã có tài khoản</a>
         </div>
+        <script src="<c:url value="/resources/js/register.js"/>"></script>
     </div>
 </div>
-<script src="<c:url value="/resources/js/register.js"/>"></script>

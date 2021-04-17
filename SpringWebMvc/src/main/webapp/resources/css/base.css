@@ -26,6 +26,17 @@ body {
 *:before {
 	box-sizing: border-box;
 }
+#header-sticky {
+    padding: 5px 0 10px;
+    font-family: "Barlow",sans-serif;
+    font-size: 18px;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
+    overflow: visible;
+}
 
 :root {
 	--header-outer-height: 110px;

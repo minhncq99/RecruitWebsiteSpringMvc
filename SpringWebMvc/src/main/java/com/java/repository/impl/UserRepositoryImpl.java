@@ -1,14 +1,16 @@
 package com.java.repository.impl;
 
-import com.java.pojo.Career;
-import com.java.repository.CareerRepository;
+import com.java.pojo.User;
+import com.java.repository.UserRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
@@ -19,38 +21,45 @@ import org.hibernate.query.Query;
  * @author minh
  */
 @Repository
-public class CareerRepositoryImpl implements CareerRepository{
+public class UserRepositoryImpl  implements UserRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
     @Override
     @Transactional
-    public List<Career> getCareers() {
+    public boolean addUser(User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Career> criteriaQuery = builder.createQuery(Career.class);
-        Root<Career> root = criteriaQuery.from(Career.class);
-        criteriaQuery.select(root);
+        try {
+           user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+           session.save(user);
+           return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
         
-        Query<Career> query = session.createQuery(criteriaQuery);
-        
-        return query.getResultList();
+        return false;
     }
 
     @Override
     @Transactional
-    public Career getCareerById(int id) {
+    public List<User> getUsers(String username) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Career> query = builder.createQuery(Career.class);
-        Root<Career> root = query.from(Career.class);
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
         
-        Predicate predicate = builder.equal(root.get("id").as(Integer.class), id);
-        query = query.where(predicate);
+        Predicate predicte = builder.equal(root.get("userName").as(String.class), username.trim());
+        query = query.where(predicte);
         
         Query result = session.createQuery(query);
-        return (Career) result.getResultList().get(0);
+        return result.getResultList();
     }
+    
 }

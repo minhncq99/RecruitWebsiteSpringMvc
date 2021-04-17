@@ -9,4 +9,5 @@ import com.java.pojo.Career;
  */
 public interface CareerService {
     List<Career> getCareers();
+    Career getCareerById(int id);
 }

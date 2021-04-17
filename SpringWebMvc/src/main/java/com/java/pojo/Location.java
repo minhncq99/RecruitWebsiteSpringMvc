@@ -12,8 +12,8 @@ import javax.persistence.Table;
  * @author minh
  */
 @Entity
-@Table(name = "work_location")
-public class WorkLocation implements Serializable {
+@Table(name = "location")
+public class Location implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
