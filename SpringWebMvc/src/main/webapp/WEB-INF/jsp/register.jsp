@@ -85,26 +85,30 @@
                              src="<c:url value="/resources/images/manager.png" />" 
                              alt="logo">
                     </div>
-                    <form:errors path="*" element="div" />
                     <div class="form-group">
                         <form:label path="userName">Tên đăng nhập</form:label>
                         <form:input path="userName" cssClass="form-control" type="text"/>
+                        <form:errors path="userName" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="password">Mật Khẩu</form:label>
                         <form:input path="password" cssClass="form-control" type="password" />
+                        <form:errors path="password" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="rePassword">Nhập lại mật khẩu</form:label>
                         <form:input path="rePassword" cssClass="form-control" type="password" />
+                        <form:errors path="rePassword" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="name">Tên công ty</form:label>
                         <form:input path="name" cssClass="form-control" type="text"/>
+                        <form:errors path="name" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="email">Địa chỉ email</form:label>
                         <form:input path="email" cssClass="form-control" type="text"/>
+                        <form:errors path="email" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="location_id">Nơi làm việc</form:label>
@@ -113,6 +117,7 @@
                                 <form:option value="${l.id}" label="${l.name}"/>
                             </c:forEach>
                         </form:select>
+                        <form:errors path="location_id" cssClass="text-danger" />
                     </div>
                         <div class="form-group">
                         <form:label path="description">Mô tả về công ty</form:label>
