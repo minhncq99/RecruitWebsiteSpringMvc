@@ -22,19 +22,8 @@
 <div class="container" id="login-container">
     <div id="login-block" >
         <div class="row w-100" >
-            <p type="button" class="btn btn-primary col-6 active">Ứng viên</p>
-            <p type="button" class="btn btn-primary col-6">Nhà tuyển dụng</p>
+            <p type="button" class="btn btn-primary col-12">Đăng nhập</p>
         </div>
-        <form id="user" method="POST">
-            <div class="row justify-content-around">
-                <img height="120px" width="120px" 
-                     src="<c:url value="/resources/images/user.png" />" 
-                     alt="logo">
-            </div>
-            <input class="form-control" type="text" placeholder="Tên đăng nhập">
-            <input class="form-control" type="password"  placeholder="Mật khẩu">
-            <input class="form-control btn btn-success" type="submit" value="Đăng Nhập">
-        </form>
         <form id="manager" method="POST" action="${action}">
             <div class="row justify-content-around">
                 <img height="120px" width="120px" 
@@ -50,4 +39,3 @@
         </div>
     </div>
 </div>
-<script src="<c:url value="/resources/js/login.js"/>"></script>

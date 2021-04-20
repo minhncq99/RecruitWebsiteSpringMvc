@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Employer implements Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull(message = "Trường dữ liệu không được rỗng")
     private String description;

@@ -1,0 +1,81 @@
+/* 
+    Created on : Apr 16, 2021, 11:06:05 AM
+    Author     : minh
+*/
+#employer-header {
+    position: relative;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#employer-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle ,rgba(255,255,255, 0.5), rgba(255,255,255, 1));
+}
+
+#employer-header h2{
+    z-index: 2;
+    transform: translate(0, 30%);
+}
+
+#employer-content {   
+    min-height: 500px;
+}
+
+#employer-content>div:first-child {
+    position: relative;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px; 
+    border: 1px solid #e8ecec;
+    background-color: rgb(251, 251, 251);
+    height: 100%;
+    padding: 0;
+}
+
+#employer-content>div:first-child>div:first-child {
+    background-color: rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+#employer-content>div:first-child>div:last-child {
+    margin: 0 20px;
+}
+
+#employer-content>div:first-child>div:last-child>.form-control {
+    margin: 5px 0;
+}
+#employer-content>div:first-child>div:last-child form {
+    margin-top: 5px;
+}
+#employer-content>div:first-child>div:last-child form>div:first-child {
+    padding-right: 0;
+}
+#employer-content>div:first-child>div:last-child form input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; 
+}
+#employer-content>div:first-child>div:last-child form>div:last-child {
+    padding-left: 0;
+}
+#employer-content>div:first-child>div:last-child form button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0; 
+}
+#employer-content>div:last-child label {
+    display: block;
+    text-align: left;
+}
+
+#employer-content>div:last-child form {
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
