@@ -35,57 +35,68 @@
         <c:choose>
             <c:when test="${action == null}">
                 <h3 class="p-3">Đăng tin mới</h3>
-                <form id="addNews" method="POST">
+                ${addError}
+                ${addSuccess}
+                <form:form id="addNews" method="POST" action="/SpringWebMvc/employer/addNews/" modelAttribute="news">
                     <div class="form-group py-2">
-                        <label for="name">Tên bài đăng</label>
-                        <input id="name" class="form-control" type="text"/>
+                        <form:label path="name">Tên bài đăng</form:label>
+                        <form:input path="name" class="form-control" type="text"/>
+                        <form:errors path="name" cssClass="text-danger" />
                     </div>
                     <div class="form-group py-2">
-                        <label for="salary">Mức lương</label>
-                        <input id="salary" class="form-control" type="text"/>
+                        <form:label path="salary">Mức lương</form:label>
+                        <form:input path="salary" class="form-control" type="text"/>
+                        <form:errors path="salary" cssClass="text-danger" />
                     </div>
                     <div class="form-group py-2">
-                        <label for="experiance">Kinh nghiệm yêu cầu</label>
-                        <input id="experiance" class="form-control" type="text"/>
+                        <form:label path="experiance">Kinh nghiệm yêu cầu</form:label>
+                        <form:input path="experiance" class="form-control" type="text"/>
+                        <form:errors path="experiance" cssClass="text-danger" />
                     </div>
                     <div class="form-group py-2">
-                        <label for="typeWorking">Hình thức làm việc</label>
-                        <input id="typeWorking" class="form-control" type="text"/>
+                        <form:label path="typeWorking">Hình thức làm việc</form:label>
+                        <form:input path="typeWorking" class="form-control" type="text"/>
+                        <form:errors path="typeWorking" cssClass="text-danger" />
                     </div>
                     <div class="form-group py-2 row">
                         <div class="col-6">
-                            <label for="dateStart">Ngày bắt đầu nhận CV</label>
-                            <input id="dateStart" class="form-control" type="date"/>
+                            <form:label path="timeStart">Ngày bắt đầu tuyển dụng</form:label>
+                            <form:input path="timeStart" class="form-control" type="date"/>
+                            <form:errors path="timeStart" cssClass="text-danger" />
                         </div>
                         <div class="col-6">
-                            <label for="dateEnd">Ngày kết thúc tuyển</label>
-                            <input id="dateEnd" class="form-control" type="date"/>
+                            <form:label path="timeEnd">Ngày kết thúc tuyển dụng</form:label>
+                            <form:input path="timeEnd" class="form-control" type="date"/>
+                            <form:errors path="timeEnd" cssClass="text-danger" />
                         </div>
                     </div>
                     <div class="form-group py-2 row">
                         <div class="col-6">
-                            <label for="career">Ngành nghề</label>
-                            <select id="career" class="form-control" type="text">
+                            <form:label path="careerId">Ngành nghề</form:label>
+                            <form:select path="careerId" class="form-control" type="text">
                                 <c:forEach items="${careers}" var="c">
-                                    <option value="${c.id}">${c.name}</option>
+                                    <form:option value="${c.id}" label="${c.name}" />
                                 </c:forEach>
-                            </select>
+                            </form:select>
+                            <form:errors path="careerId" cssClass="text-danger" />
                         </div>
                         <div class="col-6">
-                            <label for="location">Nơi làm việc</label>
-                            <select id="location" class="form-control" type="text">
+                            <form:label path="locationId">Nơi làm việc</form:label>
+                            <form:select path="locationId" class="form-control" type="text">
                                 <c:forEach items="${location}" var="l">
-                                    <option value="${l.id}">${l.name}</option>
+                                    <form:option value="${l.id}" label="${l.name}" />
                                 </c:forEach>
-                            </select>
+                            </form:select>
+                            <form:errors path="locationId" cssClass="text-danger" />
                         </div>
                     </div>
                     <div class="form-group py-2">
-                        <label for="description">Mô tả công việc</label>
-                        <textarea id="description" class="form-control" type="text"></textarea>
+                        <form:label path="description">Mô tả công việc</form:label>
+                        <form:textarea path="description" cssClass="form-control" rows="3" />
                     </div>
                     <input class="form-control btn btn-success" type="submit" value="Tạo bài đăng">
-                </form>
+                    
+                </form:form>
             </c:when>
         </c:choose>
     </div>
