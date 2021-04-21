@@ -1,5 +1,6 @@
 package com.java.service.impl;
 
+import com.java.pojo.Employer;
 import com.java.pojo.EmployerRegisterForm;
 import com.java.repository.EmployerRepository;
 import com.java.service.EmployerService;
@@ -19,6 +20,11 @@ public class EmployerServiceImpl implements EmployerService{
     @Override
     public boolean addEmployer(EmployerRegisterForm employerRegister) {
         return this.employerRepository.addEmployer(employerRegister);
+    }
+
+    @Override
+    public Employer getEmployer(String username) {
+        return this.employerRepository.getEmployer(username);
     }
     
 }

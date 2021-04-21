@@ -1,6 +1,7 @@
 package com.java.pojo;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -9,22 +10,21 @@ import javax.validation.constraints.Size;
  */
 public class ApplicantRegisterForm {
     
-    @Size(min = 5, max = 45)
+    @Size(min = 5, max = 20, message = "{error.invalid.username.size}")
     private String username;
-    @NotNull
+    @Size(min = 5, max = 45, message = "{error.invalid.password.size}")
     private String password;
-    @NotNull
+    @Size(min = 5, max = 45, message = "{error.invalid.password.size}")
     private String rePassword;
-    @NotNull
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$" ,message = "{error.invalid.email.format}")
     private String email;
-    @NotNull
+    @Size(min =1, message = "{error.notnull}")
     private String name;
-    private String role;
-    @NotNull
+    @Size(min =1, message = "{error.notnull}")
     private String gender;
     private String description;
     private String experiance;
-    @NotNull
+    @Min(value = 1, message = "{error.notnull}")
     private int careerId;
 
     public String getUsername() {
@@ -66,14 +66,6 @@ public class ApplicantRegisterForm {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getDescription() {
         return description;
@@ -106,6 +98,4 @@ public class ApplicantRegisterForm {
     public void setCareerId(int careerId) {
         this.careerId = careerId;
     }
-    
-    
 }

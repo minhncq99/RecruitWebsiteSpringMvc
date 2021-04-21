@@ -57,21 +57,18 @@ public class RegisterController {
     }
 
     @PostMapping("/emp")
-    public String employerRegister(Model model, 
-            @Valid @ModelAttribute(value = "employer") EmployerRegisterForm employer,
-            BindingResult result) {
+    public String employerRegister(Model model, @Valid @ModelAttribute(value = "employer") EmployerRegisterForm employer, BindingResult result) {
+        model.addAttribute("form", "empl");
         if (result.hasErrors()) 
             return "register";
         if (!this.employerService.addEmployer(employer)) {
-            return "register";
+            return "redirect:/register/empl";
         }
         return "redirect:/";
     }
     
     @PostMapping("/app")
-    public String applicantRegister(Model model, 
-                @Valid @ModelAttribute(value = "applicant") ApplicantRegisterForm applicant,
-            BindingResult result) {
+    public String applicantRegister(Model model, @Valid @ModelAttribute(value = "applicant") ApplicantRegisterForm applicant, BindingResult result) {
         if(result.hasErrors()) {
             return "register";
         }

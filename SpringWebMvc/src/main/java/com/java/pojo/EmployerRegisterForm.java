@@ -1,6 +1,7 @@
 package com.java.pojo;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -9,15 +10,18 @@ import javax.validation.constraints.Size;
  */
 public class EmployerRegisterForm {
 
-    @Size(min = 8, max = 45, message = "Tên không hợp lệ")
-    @NotBlank(message = "Trường dữ liệu không được phép bỏ trống!")
+    @Size(min = 5, max = 20, message = "{error.invalid.username.size}")
     private String userName;
-    @NotBlank(message = "Trường dữ liệu không được phép bỏ trống!")
+    @Size(min = 5, max = 45, message = "{error.invalid.password.size}")
     private String password;
+    @Size(min = 5, max = 45, message = "{error.invalid.password.size}")
     private String rePassword;
+    @Size(min =1, message = "{error.notnull}")
     private String name;
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$" ,message = "{error.invalid.email.format}")
     private String email;
     private String description;
+    @Min(value = 1, message = "{error.notnull}")
     private int location_id;
 
     public String getUserName() {

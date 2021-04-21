@@ -53,5 +53,9 @@
         <put-attribute name="title" value="Chart" />
         <put-attribute name="content" value="/WEB-INF/jsp/chart.jsp" />
         <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
+    
+    <definition name="employer" extends="baseLayout">
+        <put-attribute name="title" value="Employer" />
+        <put-attribute name="content" value="/WEB-INF/jsp/employer.jsp" />
     </definition>
 </tiles-definitions>
