@@ -1,7 +1,3 @@
-/* 
-    Created on : Apr 8, 2021, 11:37:46 AM
-    Author     : minh
-*/
 * {
     margin: 0;
     padding: 0;
@@ -13,31 +9,18 @@ body, html {
 body {
     color: rgb(40, 57, 90);
     font-family: "DM Sans", sans-serif;
-	/* background-color: #f2f5f7; */
 	line-height: 1.5;
 	/* min-height: 300vh; */
 	position: relative;
     z-index: -1;
 }
 
-/*--- Header ----*/
+/*========================= Header =========================*/
 *,
 *:after,
 *:before {
 	box-sizing: border-box;
 }
-#header-sticky {
-    padding: 5px 0 10px;
-    font-family: "Barlow",sans-serif;
-    font-size: 18px;
-    background-color: white;
-    overflow: hidden;
-    width: 100%;
-    z-index: 100;
-    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
-    overflow: visible;
-}
-
 :root {
 	--header-outer-height: 110px;
 	--header-inner-height: 70px;
@@ -48,7 +31,7 @@ body {
 }
 
 .responsive-wrapper {
-	width: 90%;
+	/* width: 90%; */
 	max-width: 1280px;
 	margin-left: auto;
 	margin-right: auto;
@@ -79,7 +62,7 @@ body {
 	/* Other */
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 }
 
 /* Styling of other elements */
@@ -101,25 +84,21 @@ body {
 	position: relative;
 	font-weight: 500;
 }
-
 .header-navigation a {
 	display: none;
 	font-size: 1.125rem;
 	color: inherit;
 	text-decoration: none;
 }
-
 .header-navigation button {
 	border: 0;
 	background-color: transparent;
 	padding: 0;
 }
-
 .header-navigation a:hover:after,
 .header-navigation button:hover:after {
 	transform: scalex(1);
 }
-
 .header-navigation a:after,
 .header-navigation button:after {
 	transition: 0.25s ease;
@@ -133,11 +112,9 @@ body {
 	bottom: -2px;
 	left: 0;
 }
-
 .main {
 	margin-top: 3rem;
 }
-
 .widget {
 	width: 100%;
 	max-width: 600px;
@@ -150,74 +127,68 @@ body {
 	margin-bottom: 2rem;
 	font-size: 1.125rem;
 }
-
 .widget > * + * {
 	margin-top: 1.25em;
 }
-
 .widget h2 {
 	font-size: 1.5rem;
 	font-weight: 700;
 	line-height: 1.25;
 }
-
 .widget code {
 	display: inline-block;
 	padding: 0.125em 0.25em;
 	border-radius: 2px;
 	background-color: #bee5d3;
 }
-
 .widget strong {
 	font-weight: 700;
 }
-
 @media (min-width: 800px) {
 	.header-navigation a {
 		display: inline-block;
 	}
-
 	.header-navigation button {
 		display: none;
 	}
 }
 
- /*--------------------- Banner ------------------*/
- #banner {
-    width: 100%;
-    height: 400px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	position: absolute;
-	z-index: -1;   
- }
-#banner-model {
-    color: white;
-    background-color: rgba(0,0,0, 0.5);
-    width: 80%;
-    height: 50%;
-    margin: auto;
-    transform: translate(0, 50%);
-    padding: 30px 40px;
-    border-radius: 3px;
+ /*========================= Banner =========================*/
+ 
+  /* ========================= Content slide of index - SERVICES ========================= */
+.bg-grey {
+background-color: #f6f6f6;
 }
-#banner-model form::after {
-	display: block;
+.container-fluid {
+padding: 60px 50px;
+}
+.logo-small {
+font-size: 50px;
+}
+.logo {
+font-size: 200px;
+}
+.thumbnail {
+padding: 0 0 15px 0;
+border: none;
+border-radius: 0;
+}
+.thumbnail img {
+width: 100%;
+height: 100%;
+margin-bottom: 10px;
+}
+.slideanim {
+	z-index: -1;
 	position: relative;
 }
-#banner-model form{
-    width: 80%;
-    margin: 25px auto;
-}
-.find-block {
-    padding: 0 3px;
-}
-.form-control {
-    border-radius: 2px;
+#tour {
+	z-index: -1;
+	position: relative;
 }
 
-/*--------------------------- Footer -----------------------*/
+
+/*========================= Footer =========================*/
 /* .footers a {color:#696969;}
 .footers p {color:#696969;}
 .footers ul {line-height:30px;}
@@ -243,36 +214,4 @@ body {
  }
   */
 
-
-  /* Content slide of index - serrvices -------------------------------------------------------- */
-  .bg-grey {
-    background-color: #f6f6f6;
-  }
-  .container-fluid {
-    padding: 60px 50px;
-  }
-  .logo-small {
-    font-size: 50px;
-  }
-  .logo {
-    font-size: 200px;
-  }
-  .thumbnail {
-    padding: 0 0 15px 0;
-    border: none;
-    border-radius: 0;
-  }
-  .thumbnail img {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
-  }
-  .slideanim {
-	  z-index: -1;
-	  position: relative;
-}
-#tour {
-	z-index: -1;
-	position: relative;
-}
 

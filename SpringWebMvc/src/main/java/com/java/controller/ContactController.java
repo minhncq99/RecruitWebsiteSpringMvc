@@ -6,32 +6,32 @@
 package com.java.controller;
 
 import com.java.service.CareerService;
-import com.java.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.java.service.LocationService;
 
 /**
  *
  * @author ACER
  */
 @Controller
-@RequestMapping("/job")
-public class JobController {
+@RequestMapping("/contact")
+public class ContactController {
     
     @Autowired
     private CareerService careerService;
     
     @Autowired
-    private LocationService locationService;
+    private LocationService workLocationService;
     
     
     @RequestMapping("/")
-    public String job(Model model) {
-        model.addAttribute("cssfile", "job");
+    public String contact(Model model) {
+        model.addAttribute("cssfile", "contact");
         model.addAttribute("careers", careerService.getCareers());
-        model.addAttribute("locations", locationService.getLocations());
-        return "job";
+        model.addAttribute("locations", workLocationService.getLocations());
+        return "contact";
     }
 }
