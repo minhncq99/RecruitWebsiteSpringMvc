@@ -10,5 +10,5 @@ import com.java.pojo.News;
  */
 public interface NewsService {
     boolean addNews(NewsForm newsForm);
-    List<News> getNews(String employerName);
+    List<News> getNewsByUser(String employerName, int page, int size);
 }

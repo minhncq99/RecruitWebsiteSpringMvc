@@ -33,6 +33,7 @@
     </div>
     <div class="col-9">
         <c:choose>
+            <%-- Create News --%>
             <c:when test="${action == null}">
                 <h3 class="p-3">Đăng tin mới</h3>
                 ${addError}
@@ -95,10 +96,11 @@
                         <form:textarea path="description" cssClass="form-control" rows="3" />
                     </div>
                     <input class="form-control btn btn-success" type="submit" value="Tạo bài đăng">
-                    
+
                 </form:form>
             </c:when>
             <c:when test="${action == 'history'}">
+                <%-- History --%>
                 <h3 class="p-3">Lịch sử bài đăng</h3>
                 <c:forEach items="${newsList}" var="n">
                     <div class="news-container">
@@ -118,9 +120,23 @@
                         </div>
                     </div>
                 </c:forEach>
+                <nav aria-label="pagination" class="d-flex justify-content-end">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </c:when>
         </c:choose>
     </div>
-    
-    <!-- History -->
+
 </div>

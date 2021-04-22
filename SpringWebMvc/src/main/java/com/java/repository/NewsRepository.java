@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface NewsRepository {
     boolean addNews(NewsForm newsForm);
-    List<News> getNews(String employerName);
+    List<News> getNewsByUser(String employerName, int page, int size);
 }

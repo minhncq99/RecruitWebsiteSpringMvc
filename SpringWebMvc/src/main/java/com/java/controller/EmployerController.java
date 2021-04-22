@@ -39,16 +39,23 @@ public class EmployerController {
         model.addAttribute("news", new NewsForm());
     }
 
-    @RequestMapping({"/", "/{action}"})
-    public String employerPage(@PathVariable(required = false) String action,Authentication auth, Model model) {
-        if (action != null && action.equals("statistics")) {
-            model.addAttribute("action", "statistics");
-        } else if (action != null && action.equals("history")) {
-            model.addAttribute("action", "history");
-            model.addAttribute("newsList", this.newsService.getNews(auth.getName()));
-        } else {
-            this.addFormModel(model);
+    @RequestMapping("/")
+    public String defaultPage(Model model) {
+        this.addFormModel(model);
+        return "employer";
+    }
+    
+    @RequestMapping({"/history", "/history/{page}"})
+    public String historyPage(Authentication auth, Model model, @PathVariable(required = false) String page) {
+        int pageNumber = 1;
+        try {
+            pageNumber = Integer.parseInt(page);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
         }
+        model.addAttribute("newsList", this.newsService.getNewsByUser(auth.getName(), pageNumber, 5));
+        this.addPaginationAttribute(model, page, page);
+        
         return "employer";
     }
     
@@ -71,5 +78,11 @@ public class EmployerController {
         model.addAttribute("action", null);
         model.addAttribute("location", this.locationService.getLocations());
         model.addAttribute("career", this.careerService.getCareers());
+    }
+    
+    private void addPaginationAttribute(Model model, String previous, String next) {
+        model.addAttribute("action", "history");
+        model.addAttribute("previous", previous);
+        model.addAttribute("next", next);
     }
 }

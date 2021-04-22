@@ -9,7 +9,6 @@ import com.java.service.LocationService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -73,16 +72,21 @@ public class NewsRepositoryImpl implements NewsRepository {
 
     @Override
     @Transactional
-    public List<News> getNews(String employerName) {
+    public List<News> getNewsByUser(String employerName, int page, int size) {
+        int position = (page - 1) * size;
+        
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<News> query = builder.createQuery(News.class);
         Root<News> root = query.from(News.class);
         
-        Predicate predicate = builder.equal(root.get("employer").as(String.class), employerName.trim());
+        Predicate predicate = builder.equal(root.join("employer").join("user").get("userName").as(String.class), employerName.trim());
+        query.where(predicate);
         
         Query result = session.createQuery(query);
+        result.setFirstResult(position);
+        result.setMaxResults(size);
         
         return result.getResultList();
     }
