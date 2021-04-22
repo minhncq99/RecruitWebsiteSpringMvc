@@ -55,8 +55,10 @@ public class EmployerController {
         }
         pageNumber = (pageNumber < 1) ? -pageNumber : pageNumber; 
         model.addAttribute("newsList", this.newsService.getNewsByUser(auth.getName(), pageNumber, 5));
-        this.addPaginationAttribute(model, (pageNumber < 2) ? "disabled" : "", "", pageNumber);
-        model.addAttribute("count", this.newsService.getNumberNewsByUser(auth.getName()));
+        long countNews = this.newsService.getNumberNewsByUser(auth.getName());
+        this.addPaginationAttribute(model, (pageNumber < 2) ? "disabled" : "",
+                (pageNumber * 5 < countNews) ? "" : "disabled", pageNumber);
+        model.addAttribute("count", countNews);
         return "employer";
     }
     
