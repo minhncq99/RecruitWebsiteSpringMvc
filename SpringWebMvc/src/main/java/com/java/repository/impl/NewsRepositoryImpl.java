@@ -8,12 +8,19 @@ import com.java.service.EmployerService;
 import com.java.service.LocationService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -30,6 +37,7 @@ public class NewsRepositoryImpl implements NewsRepository {
     private CareerService careerService;
     @Autowired
     private LocationService locationService;
+    
     @Override
     @Transactional
     public boolean addNews(NewsForm newsForm) {
@@ -61,6 +69,22 @@ public class NewsRepositoryImpl implements NewsRepository {
         }
         
         return false;
+    }
+
+    @Override
+    @Transactional
+    public List<News> getNews(String employerName) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<News> query = builder.createQuery(News.class);
+        Root<News> root = query.from(News.class);
+        
+        Predicate predicate = builder.equal(root.get("employer").as(String.class), employerName.trim());
+        
+        Query result = session.createQuery(query);
+        
+        return result.getResultList();
     }
     
 }

@@ -14,9 +14,9 @@
     <div class="col-3 text-center">
         <div class="pt-1 pb-2">Công cụ</div>
         <div>
-            <a href="#" class="btn btn-primary form-control">Đăng tin mới</a>
-            <a href="#" class="btn btn-primary form-control">Thống kê</a>
-            <a href="#" class="btn btn-primary form-control">Lịch sử đăng tin</a>
+            <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
+            <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
+            <a href="<c:url value='/employer/history'/>" class="btn btn-primary form-control">Lịch sử đăng tin</a>
             <div class="row justify-content-center">
                 <div class="col-12">
                     <form class="form-group row justify-content-center">
@@ -98,6 +98,29 @@
                     
                 </form:form>
             </c:when>
+            <c:when test="${action == 'history'}">
+                <h3 class="p-3">Lịch sử bài đăng</h3>
+                <c:forEach items="${newsList}" var="n">
+                    <div class="news-container">
+                        <div class="news-title">${n.name}</div>
+                        <div class="row">
+                            <div class="col-6 text-left">
+                                <p>Mức lương: ${n.salary}</p>
+                                <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
+                                <p>Ngành nghề: ${n.career.name}</p>
+                                <p>Nơi làm việc: ${n.location.name}</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p>Hình thức làm việc: ${n.typeWorking}</p>
+                                <p>Ngày bắt đầu: ${n.timeStart}</p>
+                                <p>Ngày kết thúc: ${n.timeStart}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:when>
         </c:choose>
     </div>
+    
+    <!-- History -->
 </div>

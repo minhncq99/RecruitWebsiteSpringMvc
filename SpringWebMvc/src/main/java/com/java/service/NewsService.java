@@ -1,6 +1,8 @@
 package com.java.service;
 
 import com.java.pojo.NewsForm;
+import java.util.List;
+import com.java.pojo.News;
 
 /**
  *
@@ -8,4 +10,5 @@ import com.java.pojo.NewsForm;
  */
 public interface NewsService {
     boolean addNews(NewsForm newsForm);
+    List<News> getNews(String employerName);
 }

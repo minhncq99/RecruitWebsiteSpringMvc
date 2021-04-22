@@ -40,11 +40,12 @@ public class EmployerController {
     }
 
     @RequestMapping({"/", "/{action}"})
-    public String employerPage(@PathVariable(required = false) String action, Model model) {
+    public String employerPage(@PathVariable(required = false) String action,Authentication auth, Model model) {
         if (action != null && action.equals("statistics")) {
             model.addAttribute("action", "statistics");
         } else if (action != null && action.equals("history")) {
             model.addAttribute("action", "history");
+            model.addAttribute("newsList", this.newsService.getNews(auth.getName()));
         } else {
             this.addFormModel(model);
         }
@@ -65,7 +66,7 @@ public class EmployerController {
         model.addAttribute("addSuccess", "Đã đăng bản tuyển dụng thành công");
         return "employer";
     }
-    
+             
     private void addFormModel(Model model) {
         model.addAttribute("action", null);
         model.addAttribute("location", this.locationService.getLocations());
