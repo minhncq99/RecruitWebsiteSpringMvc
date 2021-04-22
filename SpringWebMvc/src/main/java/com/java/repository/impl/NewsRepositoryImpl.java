@@ -90,5 +90,21 @@ public class NewsRepositoryImpl implements NewsRepository {
         
         return result.getResultList();
     }
+
+    @Override
+    @Transactional
+    public long getNumberNewsByUser(String employerName) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        Root<News> root = query.from(News.class);
+        Predicate predicate = builder.equal(root.join("employer").join("user").get("userName").as(String.class), employerName.trim());
+        query.where(predicate);
+        query.select(builder.count(root.get("id")));
+        
+        Query result = session.createQuery(query);
+        return (long) result.getSingleResult();
+    }
     
 }
