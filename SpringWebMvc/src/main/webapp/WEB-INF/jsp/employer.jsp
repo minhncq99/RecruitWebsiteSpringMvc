@@ -122,16 +122,16 @@
                 </c:forEach>
                 <nav aria-label="pagination" class="d-flex justify-content-end">
                     <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        <li class="page-item ${previous}">
+                            <a class="page-link" href="<c:url value='/employer/history/${select -1}'/>">Previous</a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item active">
                             <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+                        <li class="page-item ${next}">
+                            <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Next</a>
                         </li>
                     </ul>
                 </nav>

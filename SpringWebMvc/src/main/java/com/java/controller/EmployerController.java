@@ -53,8 +53,9 @@ public class EmployerController {
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
+        pageNumber = (pageNumber < 1) ? -pageNumber : pageNumber; 
         model.addAttribute("newsList", this.newsService.getNewsByUser(auth.getName(), pageNumber, 5));
-        this.addPaginationAttribute(model, page, page);
+        this.addPaginationAttribute(model, (pageNumber < 2) ? "disabled" : "", "", pageNumber);
         
         return "employer";
     }
@@ -80,9 +81,10 @@ public class EmployerController {
         model.addAttribute("career", this.careerService.getCareers());
     }
     
-    private void addPaginationAttribute(Model model, String previous, String next) {
+    private void addPaginationAttribute(Model model, String previous, String next, int select) {
         model.addAttribute("action", "history");
         model.addAttribute("previous", previous);
         model.addAttribute("next", next);
+        model.addAttribute("select", select);
     }
 }
