@@ -8,6 +8,7 @@ import com.java.service.EmployerService;
 import com.java.service.LocationService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -74,16 +75,12 @@ public class NewsRepositoryImpl implements NewsRepository {
     @Transactional
     public List<News> getNewsByUser(String employerName, int page, int size) {
         int position = (page - 1) * size;
-        
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<News> query = builder.createQuery(News.class);
         Root<News> root = query.from(News.class);
-        
         Predicate predicate = builder.equal(root.join("employer").join("user").get("userName").as(String.class), employerName.trim());
         query.where(predicate);
-        
         Query result = session.createQuery(query);
         result.setFirstResult(position);
         result.setMaxResults(size);
@@ -106,5 +103,25 @@ public class NewsRepositoryImpl implements NewsRepository {
         Query result = session.createQuery(query);
         return (long) result.getSingleResult();
     }
-    
+
+    @Override
+    @Transactional
+    public List<News> getNewgestNews(int page, int size) {
+        int position = (page - 1) * size;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<News> query = builder.createQuery(News.class);
+        Root<News> root = query.from(News.class);
+        Predicate predicateDateStart = builder.lessThanOrEqualTo(root.get("timeStart").as(Date.class), new Date());
+        Predicate predicateDateEnd = builder.greaterThanOrEqualTo(root.get("timeEnd").as(Date.class), new Date());
+        
+        query.where(builder.and(predicateDateStart, predicateDateEnd));
+        query.orderBy(builder.asc(root.get("timeStart")));
+        Query result = session.createQuery(query);
+        result.setFirstResult(position);
+        result.setMaxResults(size);
+        
+        return result.getResultList();
+    }
 }

@@ -57,7 +57,7 @@
                                         <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
                                      <% } %>
                                     <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
-                                        <a class="dropdown-item" href="#">Trang cá nhân</a>
+                                        <a class="dropdown-item" href="<c:url value="/applicant/" />">Trang cá nhân</a>
                                         <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
                                     <% } %>
                                     <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
