@@ -1,10 +1,11 @@
 package com.java.controller;
 
-import com.java.pojo.News;
 import com.java.pojo.NewsForm;
 import com.java.service.CareerService;
 import com.java.service.LocationService;
 import com.java.service.NewsService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -58,7 +59,12 @@ public class EmployerController {
         long countNews = this.newsService.getNumberNewsByUser(auth.getName());
         this.addPaginationAttribute(model, (pageNumber < 2) ? "disabled" : "",
                 (pageNumber * 5 < countNews) ? "" : "disabled", pageNumber);
-        model.addAttribute("count", countNews);
+        List<Integer> listPage = new ArrayList<>();
+        double maxPage = Math.ceil(countNews / 5.0);
+        for (int i = 1; i <= maxPage; i++) {
+            listPage.add(i);
+        }
+        model.addAttribute("listPage",listPage);
         return "employer";
     }
     

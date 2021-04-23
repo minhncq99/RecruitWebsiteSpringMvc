@@ -125,11 +125,18 @@
                         <li class="page-item ${previous}">
                             <a class="page-link" href="<c:url value='/employer/history/${select -1}'/>">Previous</a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <c:forEach items="${listPage}" var="l">
+                            <c:choose>
+                                <c:when test="${l == select}">
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">${l} <span class="sr-only">(current)</span></a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="<c:url value='/employer/history/${l}'/>">${l}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                         <li class="page-item ${next}">
                             <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Next</a>
                         </li>
@@ -138,5 +145,4 @@
             </c:when>
         </c:choose>
     </div>
-
 </div>
