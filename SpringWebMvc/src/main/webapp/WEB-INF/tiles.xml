@@ -36,4 +36,9 @@
         <put-attribute name="title" value="Employer" />
         <put-attribute name="content" value="/WEB-INF/jsp/employer.jsp" />
     </definition>
+    
+    <definition name="applicant" extends="baseLayout">
+        <put-attribute name="title" value="Employer" />
+        <put-attribute name="content" value="/WEB-INF/jsp/applicant.jsp" />
+    </definition>
 </tiles-definitions>
