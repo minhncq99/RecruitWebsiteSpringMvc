@@ -8,12 +8,18 @@ import com.java.service.EmployerService;
 import com.java.service.LocationService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -30,6 +36,7 @@ public class NewsRepositoryImpl implements NewsRepository {
     private CareerService careerService;
     @Autowired
     private LocationService locationService;
+    
     @Override
     @Transactional
     public boolean addNews(NewsForm newsForm) {
@@ -61,6 +68,43 @@ public class NewsRepositoryImpl implements NewsRepository {
         }
         
         return false;
+    }
+
+    @Override
+    @Transactional
+    public List<News> getNewsByUser(String employerName, int page, int size) {
+        int position = (page - 1) * size;
+        
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<News> query = builder.createQuery(News.class);
+        Root<News> root = query.from(News.class);
+        
+        Predicate predicate = builder.equal(root.join("employer").join("user").get("userName").as(String.class), employerName.trim());
+        query.where(predicate);
+        
+        Query result = session.createQuery(query);
+        result.setFirstResult(position);
+        result.setMaxResults(size);
+        
+        return result.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public long getNumberNewsByUser(String employerName) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        Root<News> root = query.from(News.class);
+        Predicate predicate = builder.equal(root.join("employer").join("user").get("userName").as(String.class), employerName.trim());
+        query.where(predicate);
+        query.select(builder.count(root.get("id")));
+        
+        Query result = session.createQuery(query);
+        return (long) result.getSingleResult();
     }
     
 }

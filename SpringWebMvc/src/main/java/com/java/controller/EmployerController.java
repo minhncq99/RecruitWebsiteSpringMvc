@@ -1,10 +1,11 @@
 package com.java.controller;
 
-import com.java.pojo.News;
 import com.java.pojo.NewsForm;
 import com.java.service.CareerService;
 import com.java.service.LocationService;
 import com.java.service.NewsService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,15 +40,31 @@ public class EmployerController {
         model.addAttribute("news", new NewsForm());
     }
 
-    @RequestMapping({"/", "/{action}"})
-    public String employerPage(@PathVariable(required = false) String action, Model model) {
-        if (action != null && action.equals("statistics")) {
-            model.addAttribute("action", "statistics");
-        } else if (action != null && action.equals("history")) {
-            model.addAttribute("action", "history");
-        } else {
-            this.addFormModel(model);
+    @RequestMapping("/")
+    public String defaultPage(Model model) {
+        this.addFormModel(model);
+        return "employer";
+    }
+    
+    @RequestMapping({"/history", "/history/{page}"})
+    public String historyPage(Authentication auth, Model model, @PathVariable(required = false) String page) {
+        int pageNumber = 1;
+        try {
+            pageNumber = Integer.parseInt(page);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
         }
+        pageNumber = (pageNumber < 1) ? -pageNumber : pageNumber; 
+        model.addAttribute("newsList", this.newsService.getNewsByUser(auth.getName(), pageNumber, 5));
+        long countNews = this.newsService.getNumberNewsByUser(auth.getName());
+        this.addPaginationAttribute(model, (pageNumber < 2) ? "disabled" : "",
+                (pageNumber * 5 < countNews) ? "" : "disabled", pageNumber);
+        List<Integer> listPage = new ArrayList<>();
+        double maxPage = Math.ceil(countNews / 5.0);
+        for (int i = 1; i <= maxPage; i++) {
+            listPage.add(i);
+        }
+        model.addAttribute("listPage",listPage);
         return "employer";
     }
     
@@ -65,10 +82,17 @@ public class EmployerController {
         model.addAttribute("addSuccess", "Đã đăng bản tuyển dụng thành công");
         return "employer";
     }
-    
+             
     private void addFormModel(Model model) {
         model.addAttribute("action", null);
         model.addAttribute("location", this.locationService.getLocations());
         model.addAttribute("career", this.careerService.getCareers());
+    }
+    
+    private void addPaginationAttribute(Model model, String previous, String next, int select) {
+        model.addAttribute("action", "history");
+        model.addAttribute("previous", previous);
+        model.addAttribute("next", next);
+        model.addAttribute("select", select);
     }
 }

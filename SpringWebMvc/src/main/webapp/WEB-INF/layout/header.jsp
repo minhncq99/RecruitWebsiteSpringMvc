@@ -52,9 +52,15 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                  <a class="dropdown-item" href="#">Trang cá nhân</a>
-                                  <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
-                                  <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
+                                    <% if (request.isUserInRole("ROLE_EMPLOYER")) { %>
+                                        <a class="dropdown-item" href="<c:url value="/employer/" />">Trang cá nhân</a>
+                                        <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                                     <% } %>
+                                    <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
+                                        <a class="dropdown-item" href="#">Trang cá nhân</a>
+                                        <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                                    <% } %>
+                                    <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
                                 </div>
                             </div>
                         </c:when>
