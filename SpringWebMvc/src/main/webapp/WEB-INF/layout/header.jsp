@@ -18,6 +18,9 @@
             <a class="nav-link" href="<c:url value="/company/" />">Công ty</a>
             <a class="nav-link" href="<c:url value="/" />">Đăng tin</a>
             <a class="nav-link" href="<c:url value="/contact/" />">Liên hệ</a>
+            <button>Menu</button>
+		</nav>
+        <div>
             <c:choose>
                 <c:when test="${pageContext.request.userPrincipal.name == null}">
                     <a href="<c:url value="/register/" />" class="btn btn-primary mr-1">Đăng ký</a>
@@ -30,14 +33,13 @@
                         </a>
                         
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Trang cá nhân</a>
+                            <a class="dropdown-item" href="<c:url value="/profile/" />">Trang cá nhân</a>
                             <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
                             <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
                         </div>
                     </div>
                 </c:when>
             </c:choose>
-            <button>Menu</button>
-		</nav>
+        </div>
 	</div>
 </header>

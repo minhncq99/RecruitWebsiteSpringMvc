@@ -39,6 +39,7 @@ body {
 
 /* Sticky header */
 .header-outer {
+	z-index: 100;
 	/* Make it stick */
 	height: var(--header-outer-height);
 	position: sticky;
@@ -80,7 +81,7 @@ body {
 .header-navigation button {
 	font-size: 1.125rem;
 	color: inherit;
-	margin-left: 1.75rem;
+	/* margin-left: 1.75rem; */
 	position: relative;
 	font-weight: 500;
 }

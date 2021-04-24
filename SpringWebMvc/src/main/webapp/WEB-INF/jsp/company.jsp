@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav hidden-xs" style="display: flex; z-index: -1;">
+        <div class="col-sm-3 sidenav hidden-xs" style="display: flex">
             <div style="margin-top: 20px">
                 <form action="/action_page.php">
                     <h6>Tìm công việc phù hợp</h6>
@@ -34,7 +34,7 @@
         </div>
         <br>
 
-        <div class="col-sm-9" style=" z-index: -1;">
+        <div class="col-sm-9">
             <div class="well">
                 <div id="myCarousel" class="carousel slide">
                     <!-- The slideshow -->
