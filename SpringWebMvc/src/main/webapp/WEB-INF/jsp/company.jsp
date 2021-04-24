@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav hidden-xs">
+        <div class="col-sm-3 sidenav hidden-xs" style="display: flex">
             <div style="margin-top: 20px">
                 <form action="/action_page.php">
                     <h6>Tìm công việc phù hợp</h6>
@@ -165,7 +165,6 @@
             </div>
             
         </div>    
-    </div>
     </div>
 </div>
 <script src="<c:url value="/resources/js/company.js"/>"></script>
