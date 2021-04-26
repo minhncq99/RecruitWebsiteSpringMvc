@@ -27,7 +27,7 @@ public class HomeController {
         model.addAttribute("cssfile", "index");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());
-        model.addAttribute("news", newsService.getNewgestNews(1, 9));
+        model.addAttribute("news", newsService.getNewgestNews(1, 8));
         return "index";
     }
 }
