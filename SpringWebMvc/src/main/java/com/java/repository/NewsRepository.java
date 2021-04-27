@@ -13,4 +13,5 @@ public interface NewsRepository {
     List<News> getNewsByUser(String employerName, int page, int size);
     long getNumberNewsByUser(String employerName);
     List<News> getNewgestNews(int page, int size);
+    News getNewsById(int id);
 }

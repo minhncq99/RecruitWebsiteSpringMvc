@@ -1,5 +1,6 @@
 package com.java.service.impl;
 
+import com.java.pojo.Applicant;
 import com.java.pojo.ApplicantRegisterForm;
 import com.java.repository.ApplicantRepository;
 import com.java.service.ApplicantService;
@@ -19,6 +20,11 @@ public class ApplicantServiceImpl implements ApplicantService{
     @Override
     public boolean addApplicant(ApplicantRegisterForm applicantRegister) {
         return this.applicantRepository.addApplicant(applicantRegister);
+    }
+
+    @Override
+    public Applicant getApplicantByUserName(String applicantUserName) {
+        return this.applicantRepository.getApplicantByUserName(applicantUserName);
     }
     
 }

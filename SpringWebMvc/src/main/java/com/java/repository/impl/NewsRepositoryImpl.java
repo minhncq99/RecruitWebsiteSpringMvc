@@ -124,4 +124,18 @@ public class NewsRepositoryImpl implements NewsRepository {
         
         return result.getResultList();
     }
+
+    @Override
+    @Transactional
+    public News getNewsById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<News> query = builder.createQuery(News.class);
+        Root<News> root = query.from(News.class);
+        Predicate predicate = builder.equal(root.get("id").as(Integer.class), id);
+        query.where(predicate);
+        
+        Query result = session.createQuery(query);
+        return (News) result.getResultList().get(0);
+    }
 }

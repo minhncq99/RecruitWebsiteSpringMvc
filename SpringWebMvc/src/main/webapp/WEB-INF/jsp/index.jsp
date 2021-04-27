@@ -65,7 +65,6 @@
         </div>
     </div>
 </div>-->
-
 <div class="row my-3">
     <h4 class="col-12 text-center">Bản tin mới nhất</h4>
     <c:forEach items="${news}" var="n"> 
@@ -76,7 +75,13 @@
                     <h2>${n.employer.user.name} tuyển dụng</h2>
                     <p>Ngành nghề: ${n.career.name}</p>
                     <p>Nơi làm việc: ${n.location.name}</p>
-                    <p><button class="button">Ứng tuyển</button></p>
+                    <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
+                        <form method="POST" action="<c:url value="/applicant/apply/?news=${n.id}&username=${pageContext.request.userPrincipal.name}" />">
+                            <button type="submit" class="button">Ứng tuyển</button></p>
+                        </form>
+                    <% } else { %>
+                        <p><button class="button" disabled>Vui lòng đăng nhập tài khoản ứng viên</button></p>
+                    <% } %>
                 </div>
             </div>
         </div>
