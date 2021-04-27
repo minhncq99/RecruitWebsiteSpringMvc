@@ -21,5 +21,10 @@ public class SearchServiceImpl implements SearchService {
     public List<News> searchJobs(String keyword, int career, int location, int page, int size) {
         return this.searchRepository.searchJobs(keyword, career, location, page, size);
     }
+
+    @Override
+    public long countSearchJobs(String keyword, int career, int location) {
+        return this.searchRepository.countSearchJobs(keyword, career, location);
+    }
     
 }

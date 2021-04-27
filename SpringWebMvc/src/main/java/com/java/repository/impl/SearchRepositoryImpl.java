@@ -49,5 +49,27 @@ public class SearchRepositoryImpl implements SearchRepository {
         
         return result.getResultList();
     }
+
+    @Override
+    @Transactional
+    public long countSearchJobs(String keyword, int career, int location) {
+        String key = String.format("%%%s%%", keyword);
+        
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        Root<News> root = query.from(News.class);
+        Predicate locationPredicate = (location != 0) ? 
+                builder.equal(root.join("location").get("id").as(Integer.class), location) :
+                builder.like(root.get("name").as(String.class), key);
+        Predicate careerPredicate = (career != 0) ? builder.equal(root.join("career").get("id").as(Integer.class), career) :
+                builder.like(root.get("name").as(String.class), key);
+        Predicate keywordPredicate = builder.like(root.get("name").as(String.class), key);
+        
+        query.where(builder.and(locationPredicate, careerPredicate, keywordPredicate));
+        query.select(builder.count(root.get("id")));
+        
+        return (long) session.createQuery(query).getSingleResult();
+    }
     
 }

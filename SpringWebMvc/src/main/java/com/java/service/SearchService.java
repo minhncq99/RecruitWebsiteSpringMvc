@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface SearchService {
     List<News> searchJobs(String keyword, int career, int location, int page, int size);
+    long countSearchJobs(String keyword, int career, int location);
 }

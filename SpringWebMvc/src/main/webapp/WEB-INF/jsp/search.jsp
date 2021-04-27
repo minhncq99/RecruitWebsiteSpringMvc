@@ -7,25 +7,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+    String careerId = request.getParameter("career");
+    String locationId = request.getParameter("location");
+    String keyword = request.getParameter("keyword");
+    String urlParam = "/search/news/?keyword=";
+%>
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs pb-3" style="display: flex">
             <div style="margin-top: 20px">
                 <form action="<c:url value="/search/news/"/>" method="GET">
                     <h6>Tìm công việc phù hợp</h6>
-                    <input name="keyword" type="text" class="form-control" placeholder="Tìm kiếm công việc">
+                    <input name="keyword" type="text" class="form-control" 
+                           placeholder="Tìm kiếm công việc" value="${keyword}">
                     <h6>Ngành nghề</h6>
                     <select name="career" class="form-control">Ngành nghề
-                        <option value="" selected>Chọn ngành nghề</option>
+                        <option value="0">Chọn ngành nghề</option>
                         <c:forEach items="${careers}" var="c">
-                            <option value="${c.id}">${c.name}</option>
+                            <c:choose>
+                                <c:when test="${c.id == careerId}">
+                                    <option value="${c.id}" selected>${c.name}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:otherwise>
+                            </c:choose>
+                            
                         </c:forEach>
                     </select>
                     <h6>Tỉnh thành</h6>
                     <select name="location" class="form-control">
-                        <option value="" selected>Chọn tỉnh thành</option>
+                        <option value="0">Chọn tỉnh thành</option>
                         <c:forEach items="${locations}" var="l">
-                            <option value="${l.id}">${l.name}</option>
+                            <c:choose>
+                                <c:when test="${l.id == locationId}">
+                                    <option value="${l.id}" selected>${l.name}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${l.id}">${l.name}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     <button type="submit" class="form-control btn btn-success">Tìm kiếm</button>
@@ -95,7 +117,7 @@
                         <div class="card">
                             <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
                             <div class="container">
-                                <h2>${n.name}</h2>
+                                <h4>${n.name}</h4>
                                 <p>Ngành nghề: ${n.career.name}</p>
                                 <p>Nơi làm việc: ${n.location.name}</p>
                                 <p><button class="button">Ứng tuyển</button></p>
@@ -107,4 +129,26 @@
         </div>    
     </div>
 </div>
+<nav aria-label="pagination" class="d-flex justify-content-end">
+<ul class="pagination">
+    <li class="page-item ${previous}">
+        <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select -1}'/>'/>">Previous</a>
+    </li>
+    <c:forEach items="${listPage}" var="l">
+        <c:choose>
+            <c:when test="${l == select}">
+                <li class="page-item active">
+                    <a class="page-link" href="#">${l} <span class="sr-only">(current)</span></a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li class="page-item"><a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${l}'/>">${l}</a></li>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    <li class="page-item ${next}">
+        <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select +1}'/>">Next</a>
+    </li>
+</ul>
+</nav>
 <script src="<c:url value="/resources/js/company.js"/>"></script>
