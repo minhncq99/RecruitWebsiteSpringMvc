@@ -7,12 +7,17 @@ import com.java.pojo.Applicant;
 import com.java.repository.ApplicantRepository;
 import com.java.service.CareerService;
 import com.java.service.UserService;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 
 /**
@@ -62,6 +67,21 @@ public class ApplicantRepositoryImpl implements ApplicantRepository {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    @Transactional
+    public Applicant getApplicantByUserName(String applicantUserName) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Applicant> query = builder.createQuery(Applicant.class);
+        Root<Applicant> root = query.from(Applicant.class);
+        Predicate predicate = builder.equal(root.join("user").get("useName").as(String.class), applicantUserName);
+        query.where(predicate);
+        
+        Query result = session.createQuery(query);
+        return (Applicant) result.getResultList().get(0);
     }
     
 }

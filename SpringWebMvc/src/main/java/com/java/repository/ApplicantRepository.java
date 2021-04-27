@@ -1,6 +1,7 @@
 package com.java.repository;
 
 import com.java.pojo.ApplicantRegisterForm;
+import com.java.pojo.Applicant;
 
 /**
  *
@@ -8,4 +9,5 @@ import com.java.pojo.ApplicantRegisterForm;
  */
 public interface ApplicantRepository {
     boolean addApplicant(ApplicantRegisterForm applicantRegister);
+    Applicant getApplicantByUserName(String applicantUserName);
 }
