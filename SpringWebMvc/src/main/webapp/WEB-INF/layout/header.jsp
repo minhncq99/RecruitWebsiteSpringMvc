@@ -8,18 +8,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <header class="header-outer">
-	<div class="header-inner responsive-wrapper">
-		<div class="header-logo">
-			<img src="<c:url value="/resources/images/logo.png" />" alt="logo" width="55%">
-		</div>
-		<nav class="header-navigation">
+    <div class="header-inner responsive-wrapper">
+        <div class="header-logo">
+            <img src="<c:url value="/resources/images/logo.png" />" alt="logo" width="55%">
+        </div>
+        <nav class="header-navigation">
             <a class="nav-link" href="<c:url value="/" />">Trang chủ</a>
             <a class="nav-link" href="<c:url value="/job/" />">Tìm việc</a>
             <a class="nav-link" href="<c:url value="/company/" />">Công ty</a>
             <a class="nav-link" href="<c:url value="/" />">Đăng tin</a>
             <a class="nav-link" href="<c:url value="/contact/" />">Liên hệ</a>
             <button>Menu</button>
-		</nav>
+        </nav>
         <div>
             <c:choose>
                 <c:when test="${pageContext.request.userPrincipal.name == null}">
@@ -31,7 +31,7 @@
                         <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             ${pageContext.request.userPrincipal.name}
                         </a>
-                        
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="<c:url value="/profile/" />">Trang cá nhân</a>
                             <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
@@ -41,5 +41,5 @@
                 </c:when>
             </c:choose>
         </div>
-	</div>
+    </div>
 </header>

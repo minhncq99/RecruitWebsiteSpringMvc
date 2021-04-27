@@ -10,58 +10,49 @@
         <put-attribute name="content" value="" />
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
     </definition>
-    
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang Chủ" />
-        <!-- <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" /> -->
+        <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" /> 
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
-    
     <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
     </definition>
-    
     <definition name="register" extends="baseLayout">
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
     </definition>
-    
     <definition name="company" extends="baseLayout">
         <put-attribute name="title" value="Company" />
         <put-attribute name="content" value="/WEB-INF/jsp/company.jsp" />
     </definition>
-   
     <definition name="profile" extends="baseLayout">
         <put-attribute name="title" value="Profile" />
         <put-attribute name="content" value="/WEB-INF/jsp/profile.jsp" />
     </definition> 
-    
     <definition name="job" extends="baseLayout">
         <put-attribute name="title" value="Job" />
-        <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
         <put-attribute name="content" value="/WEB-INF/jsp/job.jsp" />
     </definition>
-    
     <definition name="contact" extends="baseLayout">
         <put-attribute name="title" value="Contact" />
         <put-attribute name="content" value="/WEB-INF/jsp/contact.jsp" />
-        <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
     </definition>
-    
     <definition name="chart" extends="baseLayout">
         <put-attribute name="title" value="Chart" />
         <put-attribute name="content" value="/WEB-INF/jsp/chart.jsp" />
-        <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
     </definition>
-    
     <definition name="employer" extends="baseLayout">
         <put-attribute name="title" value="Employer" />
         <put-attribute name="content" value="/WEB-INF/jsp/employer.jsp" />
     </definition>
-    
     <definition name="applicant" extends="baseLayout">
         <put-attribute name="title" value="Employer" />
         <put-attribute name="content" value="/WEB-INF/jsp/applicant.jsp" />
+    </definition>
+    <definition name="search" extends="baseLayout">
+        <put-attribute name="title" value="Search" />
+        <put-attribute name="content" value="/WEB-INF/jsp/search.jsp" />
     </definition>
 </tiles-definitions>

@@ -30,9 +30,6 @@
 #login-block div:first-child p:first-child {
     border-radius: 0;
     border-top-left-radius: 3px;
-}
-#login-block div:first-child p:last-child {
-    border-radius: 0;
     border-top-right-radius: 3px;
 }
 #login-block form {
