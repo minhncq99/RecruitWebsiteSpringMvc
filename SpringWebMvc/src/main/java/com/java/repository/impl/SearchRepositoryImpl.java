@@ -1,7 +1,6 @@
 package com.java.repository.impl;
 
 import com.java.pojo.News;
-import com.java.pojo.SearchJobsForm;
 import com.java.repository.SearchRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -26,21 +26,28 @@ public class SearchRepositoryImpl implements SearchRepository {
     
     @Override
     @Transactional
-    public List<News> searchJobs(SearchJobsForm searchForm, int page, int size) {
+    public List<News> searchJobs(String keyword, int career, int location, int page, int size) {
         int position = (page - 1) * size;
-        String keyword = String.format("%%%s%%", searchForm.getKeyword());
+        String key = String.format("%%%s%%", keyword);
         
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<News> query = builder.createQuery(News.class);
         Root<News> root = query.from(News.class);
-        Predicate locationPredicate = builder.equal(root.join("location").get("id").as(Integer.class), searchForm.getLocationId());
-        Predicate careerPredicate = builder.equal(root.join("career").get("id").as(Integer.class), searchForm.getLocationId());
-        Predicate keywordPredicate = builder.like(root.get("name").as(String.class), keyword);
+        Predicate locationPredicate = (location != 0) ? 
+                builder.equal(root.join("location").get("id").as(Integer.class), location) :
+                builder.like(root.get("name").as(String.class), key);
+        Predicate careerPredicate = (career != 0) ? builder.equal(root.join("career").get("id").as(Integer.class), career) :
+                builder.like(root.get("name").as(String.class), key);
+        Predicate keywordPredicate = builder.like(root.get("name").as(String.class), key);
         
         query.where(builder.and(locationPredicate, careerPredicate, keywordPredicate));
+        query.orderBy(builder.asc(root.get("timeStart")));
+        Query result = session.createQuery(query);
+        result.setFirstResult(position);
+        result.setMaxResults(size);
         
-        return session.createQuery(query).getResultList();
+        return result.getResultList();
     }
     
 }

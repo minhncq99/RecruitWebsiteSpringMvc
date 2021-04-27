@@ -1,7 +1,6 @@
 package com.java.service.impl;
 
 import com.java.pojo.News;
-import com.java.pojo.SearchJobsForm;
 import com.java.repository.SearchRepository;
 import com.java.service.SearchService;
 import java.util.List;
@@ -19,8 +18,8 @@ public class SearchServiceImpl implements SearchService {
     private SearchRepository searchRepository;
     
     @Override
-    public List<News> searchJobs(SearchJobsForm searchForm, int page, int size) {
-        return this.searchRepository.searchJobs(searchForm, page, size);
+    public List<News> searchJobs(String keyword, int career, int location, int page, int size) {
+        return this.searchRepository.searchJobs(keyword, career, location, page, size);
     }
     
 }

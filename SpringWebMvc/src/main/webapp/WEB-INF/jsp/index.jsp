@@ -75,8 +75,7 @@
                 <div class="container">
                     <h2>${n.employer.user.name} tuyển dụng</h2>
                     <p>Ngành nghề: ${n.career.name}</p>
-                    <p>Nời làm việc: ${n.location.name}</p>
-                    <p>Nời làm việc: ${n.location.name}</p>
+                    <p>Nơi làm việc: ${n.location.name}</p>
                     <p><button class="button">Ứng tuyển</button></p>
                 </div>
             </div>
