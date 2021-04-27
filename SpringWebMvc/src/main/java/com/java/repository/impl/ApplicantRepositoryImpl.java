@@ -77,7 +77,8 @@ public class ApplicantRepositoryImpl implements ApplicantRepository {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Applicant> query = builder.createQuery(Applicant.class);
         Root<Applicant> root = query.from(Applicant.class);
-        Predicate predicate = builder.equal(root.join("user").get("useName").as(String.class), applicantUserName);
+        query.select(root);
+        Predicate predicate = builder.equal(root.join("user").get("userName").as(String.class), applicantUserName);
         query.where(predicate);
         
         Query result = session.createQuery(query);
