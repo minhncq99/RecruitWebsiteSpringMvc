@@ -1,5 +1,6 @@
 package com.java.repository.impl;
 
+import com.java.pojo.Applicant;
 import com.java.pojo.News;
 import com.java.repository.SearchRepository;
 import java.util.List;
@@ -70,6 +71,25 @@ public class SearchRepositoryImpl implements SearchRepository {
         query.select(builder.count(root.get("id")));
         
         return (long) session.createQuery(query).getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public List<Applicant> searchApplicant(String applicantUsername, int careerId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Applicant> query = builder.createQuery(Applicant.class);
+        Root<Applicant> root = query.from(Applicant.class);
+        query.select(root);
+        Predicate usernamePredicate = builder.like(root.join("user").get("userName").as(String.class), String.format("%%%s%%", applicantUsername.trim()));
+        if (careerId < 1) {
+            query.where(usernamePredicate);
+        } else {
+            Predicate careerIdPredicate = builder.equal(root.join("career").get("id").as(Integer.class), careerId);
+            query.where(builder.and(usernamePredicate, careerIdPredicate));
+        }
+        return session.createQuery(query).getResultList();
     }
     
 }

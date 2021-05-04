@@ -16,6 +16,7 @@
         <div>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
+            <a href="<c:url value='/employer/search-app'/>" class="btn btn-primary form-control">Tìm ứng viên</a>
             <a href="<c:url value='/employer/history'/>" class="btn btn-primary form-control">Lịch sử đăng tin</a>
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -134,14 +135,21 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li class="page-item"><a class="page-link" href="<c:url value='/employer/history/${l}'/>">${l}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         <li class="page-item ${next}">
                             <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Next</a>
                         </li>
                     </ul>
                 </nav>
+            </c:when>
+            <c:when test="${action == 'search-app'}">
+                Search Applicant
+                ${applicantList}
+                <c:forEach items="${applicantList}" var="a">
+                    ${a.user.name}
+                </c:forEach>
             </c:when>
         </c:choose>
     </div>

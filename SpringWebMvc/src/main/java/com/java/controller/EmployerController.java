@@ -4,6 +4,7 @@ import com.java.pojo.NewsForm;
 import com.java.service.CareerService;
 import com.java.service.LocationService;
 import com.java.service.NewsService;
+import com.java.service.SearchService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
@@ -33,6 +34,8 @@ public class EmployerController {
     private CareerService careerService;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private SearchService searchService;
     
     @ModelAttribute
     private void addModelAttribute(Model model) {
@@ -43,6 +46,13 @@ public class EmployerController {
     @RequestMapping("/")
     public String defaultPage(Model model) {
         this.addFormModel(model);
+        return "employer";
+    }
+    
+    @RequestMapping("/search-app")
+    public String searchApplicant(Model model) {
+        model.addAttribute("action", "search-app");
+        model.addAttribute("applicantList", this.searchService.searchApplicant("Minh", 0));
         return "employer";
     }
     
