@@ -9,8 +9,16 @@
 <div class="text-primary">${apply}</div>
 <div>
     <h4 class="text-center p-3">Danh sách các công ty đã nộp đơn</h4>
-    ${news}
-    <c:forEach items="${news}" var="n">
-        <div>${n.name}</div>
-    </c:forEach>
+    <div class="row">
+        <c:forEach items="${news}" var="n">
+            <div class="col-4 p-2">
+                <div class="border rounded p-2 cell">
+                    <h4>${n.name}</h4>
+                    <p>Mức lương: ${n.salary}</p>
+                    <p>Nơi làm việc: ${n.location.name}</p>
+                    <p>Ngành nghề: ${n.career.name}</p>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
 </div>
