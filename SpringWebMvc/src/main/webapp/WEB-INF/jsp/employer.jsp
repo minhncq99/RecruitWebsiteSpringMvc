@@ -6,6 +6,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div id="employer-header" class="row d-flex justify-content-center text-center p-3 mb-4"
      style="background-image:  url(<c:url value="/resources/images/employer_header.jpg"/>)">
     <h2 class="col-6">Quản lý thông tin nhà tuyển dụng</h2>
@@ -145,11 +146,29 @@
                 </nav>
             </c:when>
             <c:when test="${action == 'search-app'}">
-                Search Applicant
-                ${applicantList}
-                <c:forEach items="${applicantList}" var="a">
-                    ${a.user.name}
-                </c:forEach>
+                <h3>Tìm kiếm ứng viên</h3>
+                <form class="row" action="<c:url value="/employer/search-app/"/>" method="GET">
+                    <div class="col-6 p-1">
+                        <input type="text" class="form-control rounded" value="${keyword}" 
+                               placeholder="Nhập tên ứng viên" name="keyword"/>
+                    </div>
+                    <div class="col-5 p-1">
+                        <select class="form-control" name="career">
+                            <option value="0" selected>Chọn ngành nghề</option>
+                            <c:forEach items="${career}" var="c">
+                                <option value="${c.id}">${c.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-1 p-1">
+                        <button type="submit" class="btn btn-success border-0">
+                            Tìm
+                        </button>
+                    </div>
+                    <c:forEach items="${applicantList}" var="a">
+                        <div class="">${a.user.name}</div>
+                    </c:forEach>
+                </form>
             </c:when>
         </c:choose>
     </div>

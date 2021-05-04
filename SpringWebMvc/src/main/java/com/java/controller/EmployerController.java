@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -52,7 +53,19 @@ public class EmployerController {
     @RequestMapping("/search-app")
     public String searchApplicant(Model model) {
         model.addAttribute("action", "search-app");
-        model.addAttribute("applicantList", this.searchService.searchApplicant("Minh", 0));
+        model.addAttribute("career", this.careerService.getCareers());
+        return "employer";
+    }
+    
+    @RequestMapping("/search-app/")
+    public String searchApplicant(Model model,
+            @RequestParam(value = "keyword") String keyword,
+            @RequestParam(value = "career") String career) {
+        int careerId = career.matches("[0-9]+") ? Integer.parseInt(career) : 0;
+        model.addAttribute("applicantList", this.searchService.searchApplicant(keyword, careerId));
+        model.addAttribute("action", "search-app");
+        model.addAttribute("career", this.careerService.getCareers());
+        
         return "employer";
     }
     
