@@ -44,15 +44,19 @@
         <put-attribute name="content" value="/WEB-INF/jsp/chart.jsp" />
     </definition>
     <definition name="employer" extends="baseLayout">
-        <put-attribute name="title" value="Employer" />
+        <put-attribute name="title" value="Nhà tuyển dụng" />
         <put-attribute name="content" value="/WEB-INF/jsp/employer.jsp" />
     </definition>
     <definition name="applicant" extends="baseLayout">
-        <put-attribute name="title" value="Employer" />
+        <put-attribute name="title" value="Ứng viên" />
         <put-attribute name="content" value="/WEB-INF/jsp/applicant.jsp" />
     </definition>
     <definition name="search" extends="baseLayout">
-        <put-attribute name="title" value="Search" />
+        <put-attribute name="title" value="Tìm kiếm" />
         <put-attribute name="content" value="/WEB-INF/jsp/search.jsp" />
+    </definition>
+    <definition name="newsdetail" extends="baseLayout">
+        <put-attribute name="title" value="Tin tức" />
+        <put-attribute name="content" value="/WEB-INF/jsp/newsdetails.jsp" />
     </definition>
 </tiles-definitions>

@@ -28,7 +28,6 @@ public class ApplicantRegisterForm {
     private String experiance;
     @Min(value = 1, message = "{error.notnull}")
     private int careerId;
-    @NotBlank(message = "{error.notnull}")
     private MultipartFile cv;
 
     public String getUsername() {
