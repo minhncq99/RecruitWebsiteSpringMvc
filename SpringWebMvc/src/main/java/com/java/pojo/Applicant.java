@@ -6,7 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -22,6 +24,8 @@ public class Applicant implements Serializable {
     private String gender;
     private String description;
     private String experiance;
+    @Transient
+    private MultipartFile cv;
     @ManyToOne
     @JoinColumn(name = "user_name", nullable = false)
     private User user;
@@ -59,6 +63,14 @@ public class Applicant implements Serializable {
 
     public void setExperiance(String experiance) {
         this.experiance = experiance;
+    }
+
+    public MultipartFile getCv() {
+        return cv;
+    }
+
+    public void setCv(MultipartFile cv) {
+        this.cv = cv;
     }
 
     public User getUser() {
