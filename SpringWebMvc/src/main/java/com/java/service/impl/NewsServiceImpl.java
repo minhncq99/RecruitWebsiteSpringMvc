@@ -37,5 +37,10 @@ public class NewsServiceImpl implements NewsService {
     public List<News> getNewgestNews(int page, int size) {
         return this.newsRepository.getNewgestNews(page, size);
     }
+
+    @Override
+    public News getNewsById(int i) {
+        return this.newsRepository.getNewsById(i);
+    }
     
 }

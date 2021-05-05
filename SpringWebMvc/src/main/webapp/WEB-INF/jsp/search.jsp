@@ -117,7 +117,7 @@
                         <div class="card">
                             <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
                             <div class="container">
-                                <h4>${n.name}</h4>
+                                <a href="<c:url value="/news-details?newsid=${n.id}" />"><h4>${n.name}</h4></a>
                                 <p>Ngành nghề: ${n.career.name}</p>
                                 <p>Nơi làm việc: ${n.location.name}</p>
                                 <p><button class="button">Ứng tuyển</button></p>
