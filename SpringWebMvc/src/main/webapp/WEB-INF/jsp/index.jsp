@@ -72,7 +72,7 @@
             <div class="card">
                 <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
                 <div class="container">
-                    <h2>${n.employer.user.name} tuyển dụng</h2>
+                    <a href="<c:url value="/news-details?newsid=${n.id}" />"><h2>${n.employer.user.name} tuyển dụng</h2></a>
                     <p>Ngành nghề: ${n.career.name}</p>
                     <p>Nơi làm việc: ${n.location.name}</p>
                     <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
