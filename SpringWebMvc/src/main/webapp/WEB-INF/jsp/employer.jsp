@@ -6,6 +6,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div id="employer-header" class="row d-flex justify-content-center text-center p-3 mb-4"
      style="background-image:  url(<c:url value="/resources/images/employer_header.jpg"/>)">
     <h2 class="col-6">Quản lý thông tin nhà tuyển dụng</h2>
@@ -16,6 +17,7 @@
         <div>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
+            <a href="<c:url value='/employer/search-app'/>" class="btn btn-primary form-control">Tìm ứng viên</a>
             <a href="<c:url value='/employer/history'/>" class="btn btn-primary form-control">Lịch sử đăng tin</a>
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -134,14 +136,39 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li class="page-item"><a class="page-link" href="<c:url value='/employer/history/${l}'/>">${l}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         <li class="page-item ${next}">
                             <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Next</a>
                         </li>
                     </ul>
                 </nav>
+            </c:when>
+            <c:when test="${action == 'search-app'}">
+                <h3>Tìm kiếm ứng viên</h3>
+                <form class="row" action="<c:url value="/employer/search-app/"/>" method="GET">
+                    <div class="col-6 p-1">
+                        <input type="text" class="form-control rounded" value="${keyword}" 
+                               placeholder="Nhập tên ứng viên" name="keyword"/>
+                    </div>
+                    <div class="col-5 p-1">
+                        <select class="form-control" name="career">
+                            <option value="0" selected>Chọn ngành nghề</option>
+                            <c:forEach items="${career}" var="c">
+                                <option value="${c.id}">${c.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-1 p-1">
+                        <button type="submit" class="btn btn-success border-0">
+                            Tìm
+                        </button>
+                    </div>
+                    <c:forEach items="${applicantList}" var="a">
+                        <div class="">${a.user.name}</div>
+                    </c:forEach>
+                </form>
             </c:when>
         </c:choose>
     </div>

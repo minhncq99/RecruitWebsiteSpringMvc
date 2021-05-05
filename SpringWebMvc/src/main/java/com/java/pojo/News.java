@@ -2,6 +2,7 @@ package com.java.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -43,7 +45,9 @@ public class News implements Serializable {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
-
+    @OneToMany(mappedBy = "news")
+    private Set<ApplicantNews> applicantNews;
+    
     public int getId() {
         return id;
     }
@@ -130,5 +134,13 @@ public class News implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Set<ApplicantNews> getApplicantNews() {
+        return applicantNews;
+    }
+
+    public void setApplicantNews(Set<ApplicantNews> applicantNews) {
+        this.applicantNews = applicantNews;
     }
 }
