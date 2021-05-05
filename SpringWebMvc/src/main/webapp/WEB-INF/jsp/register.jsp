@@ -17,7 +17,8 @@
 
         <c:choose>
             <c:when test="${form == null}">
-                <form:form id="user" method="POST" action="/SpringWebMvc${register_applicant}/" modelAttribute="applicant">
+                <form:form id="user" method="POST" action="/SpringWebMvc${register_applicant}/" 
+                           modelAttribute="applicant" enctype="multipart/form-data">
                     <div class="row justify-content-around">
                         <img height="120px" width="120px" 
                              src="<c:url value="/resources/images/user.png" />" 
@@ -56,21 +57,24 @@
                         <form:input path="email" class="form-control" type="text"/>
                         <form:errors path="email" cssClass="text-danger" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> 
                         <form:label path="careerId">Ngành nghề</form:label>
                         <form:select path="careerId" class="form-control">
                             <c:forEach items="${careers}" var="c">
                                 <form:option value="${c.id}" label="${c.name}"/>
                             </c:forEach>
                         </form:select>
-                        
+
                         <form:errors path="careerId" cssClass="text-danger" />
                     </div>
                     <div class="form-group">
                         <form:label path="experiance">Trình độ học vấn</form:label>
                         <form:input path="experiance" class="form-control" type="text"/>
                     </div>
-
+                    <div class="form-group">
+                        <form:label path="cv">CV dưới định dạng PDF</form:label>
+                        <form:input path="cv" type="file"/>
+                    </div>
                     <div class="form-group">
                         <form:label path="description">Mô tả về bản thân</form:label>
                         <form:textarea path="description" class="form-control" rows="3" />
@@ -119,7 +123,7 @@
                         </form:select>
                         <form:errors path="location_id" cssClass="text-danger" />
                     </div>
-                        <div class="form-group">
+                    <div class="form-group">
                         <form:label path="description">Mô tả về công ty</form:label>
                         <form:textarea path="description" cssClass="form-control" rows="3" />
                     </div>
@@ -128,7 +132,7 @@
                 </form:form>
             </c:otherwise>
         </c:choose>
-        
+
         <div class="text-center py-2">
             <a href="<c:url value="/login/"/>">Đã có tài khoản</a>
         </div>

@@ -1,8 +1,10 @@
 package com.java.pojo;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -26,6 +28,8 @@ public class ApplicantRegisterForm {
     private String experiance;
     @Min(value = 1, message = "{error.notnull}")
     private int careerId;
+    @NotBlank(message = "{error.notnull}")
+    private MultipartFile cv;
 
     public String getUsername() {
         return username;
@@ -89,6 +93,14 @@ public class ApplicantRegisterForm {
 
     public void setExperiance(String experiance) {
         this.experiance = experiance;
+    }
+
+    public MultipartFile getCv() {
+        return cv;
+    }
+
+    public void setCv(MultipartFile cv) {
+        this.cv = cv;
     }
 
     public int getCareerId() {

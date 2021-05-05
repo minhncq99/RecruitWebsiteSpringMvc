@@ -10,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.java.service.LocationService;
+import java.io.File;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,9 +49,9 @@ public class RegisterController {
         model.addAttribute("applicant", new ApplicantRegisterForm());
         model.addAttribute("register_applicant", "/register/app");
     }
-    
-    @RequestMapping({"/","/{form}"})
-    public String register(@PathVariable(required = false) String form , Model model) {
+
+    @RequestMapping({"/", "/{form}"})
+    public String register(@PathVariable(required = false) String form, Model model) {
         if (form != null && form.equals("empl")) {
             model.addAttribute("form", "empl");
         } else {
@@ -59,18 +63,32 @@ public class RegisterController {
     @PostMapping("/emp")
     public String employerRegister(Model model, @Valid @ModelAttribute(value = "employer") EmployerRegisterForm employer, BindingResult result) {
         model.addAttribute("form", "empl");
-        if (result.hasErrors()) 
+        if (result.hasErrors()) {
             return "register";
+        }
         if (!this.employerService.addEmployer(employer)) {
             return "redirect:/register/empl";
         }
         return "redirect:/";
     }
-    
+
     @PostMapping("/app")
-    public String applicantRegister(Model model, @Valid @ModelAttribute(value = "applicant") ApplicantRegisterForm applicant, BindingResult result) {
-        if(result.hasErrors()) {
+    public String applicantRegister(Model model,
+            @Valid @ModelAttribute(value = "applicant") ApplicantRegisterForm applicant,
+            BindingResult result, HttpServletRequest request) {
+        if (result.hasErrors()) {
             return "register";
+        }
+        MultipartFile cv = applicant.getCv();
+        String rootDir = request.getSession()
+                .getServletContext().getRealPath("/");
+        if (cv != null && !cv.isEmpty()) {
+            try {
+                cv.transferTo(new File(rootDir + "resources/cv/"
+                        + applicant.getUsername() + ".pdf"));
+            } catch (IOException | IllegalStateException ex) {
+                System.err.println(ex.getMessage());
+            }
         }
         if (!this.applicantService.addApplicant(applicant)) {
             return "register";

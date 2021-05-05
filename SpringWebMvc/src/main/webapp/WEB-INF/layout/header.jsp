@@ -40,6 +40,7 @@
                             <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
                                 <a class="dropdown-item" href="<c:url value="/applicant/" />">Trang cá nhân</a>
                                 <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                                <a class="dropdown-item" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>">CV</a>
                             <% }%>
                             <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
                         </div>
