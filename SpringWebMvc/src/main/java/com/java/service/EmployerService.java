@@ -2,6 +2,7 @@ package com.java.service;
 
 import com.java.pojo.EmployerRegisterForm;
 import com.java.pojo.Employer;
+import java.util.List;
 /**
  *
  * @author minh
@@ -9,4 +10,5 @@ import com.java.pojo.Employer;
 public interface EmployerService {
     boolean addEmployer(EmployerRegisterForm employerRegister);
     Employer getEmployer(String username);
+    List<Employer> recommendEmployer(int careerId);
 }

@@ -7,6 +7,7 @@ import com.java.pojo.Location;
 import com.java.repository.EmployerRepository;
 import com.java.service.LocationService;
 import com.java.service.UserService;
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -68,6 +69,7 @@ public class EmployerRepositoryImpl implements EmployerRepository {
     }
 
     @Override
+    @Transactional
     public Employer getEmployer(String username) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
@@ -82,5 +84,19 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         Query result = session.createQuery(query);
         return (Employer) result.getResultList().get(0);
     }
-    
+
+    @Override
+    @Transactional
+    public List<Employer> recommendEmployer(int careerId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employer> query = builder.createQuery(Employer.class);
+        Root<Employer> root = query.from(Employer.class);
+        
+        Predicate predicate = builder.equal(root.join("news").join("career")
+                .get("id").as(Integer.class), careerId);
+        query.where(predicate).groupBy(root.get("id"));
+        Query result = session.createQuery(query);
+        return result.getResultList();
+    }
 }
