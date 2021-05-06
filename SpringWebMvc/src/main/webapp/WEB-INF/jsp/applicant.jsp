@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="text-primary">${apply}</div>
 <div>
-    <h4 class="text-center p-3">Danh sách các công ty đã nộp đơn</h4>
+    <h4 class="text-center p-3">Danh sách các bài đã nộp</h4>
     <div class="row">
         <c:forEach items="${news}" var="n">
             <div class="col-4 p-2">
@@ -17,6 +17,16 @@
                     <p>Mức lương: ${n.salary}</p>
                     <p>Nơi làm việc: ${n.location.name}</p>
                     <p>Ngành nghề: ${n.career.name}</p>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+    <h4 class="text-center p-3">Công ty có thể phù hợp với bạn</h4>
+    <div class="row">
+        <c:forEach items="${employer}" var="e">
+            <div class="col-4 p-2">
+                <div class="border rounded p-2 cell">
+                    <h4>${e.user.name}</h4>
                 </div>
             </div>
         </c:forEach>

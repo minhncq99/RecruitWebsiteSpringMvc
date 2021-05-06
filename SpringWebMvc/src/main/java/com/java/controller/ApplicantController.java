@@ -1,6 +1,8 @@
 package com.java.controller;
 
 import com.java.service.ApplicantNewsService;
+import com.java.service.ApplicantService;
+import com.java.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,10 @@ public class ApplicantController {
     
     @Autowired
     private ApplicantNewsService applicantNewsService;
+    @Autowired
+    private EmployerService employerService;
+    @Autowired
+    private ApplicantService applicantService;
     
     @ModelAttribute
     private void moddelAttribute(Model model) {
@@ -32,6 +38,8 @@ public class ApplicantController {
     public String defaultPage(Model model, Authentication auth) {
         model.addAttribute("news", 
                 this.applicantNewsService.getNewsApplyByUserName(auth.getName()));
+        model.addAttribute("employer", this.employerService.recommendEmployer(
+            this.applicantService.getApplicantByUserName(auth.getName()).getCareer().getId()));
         return "applicant";
     }
     

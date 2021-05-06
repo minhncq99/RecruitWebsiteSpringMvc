@@ -146,29 +146,31 @@
                 </nav>
             </c:when>
             <c:when test="${action == 'search-app'}">
-                <h3>Tìm kiếm ứng viên</h3>
-                <form class="row" action="<c:url value="/employer/search-app/"/>" method="GET">
-                    <div class="col-6 p-1">
-                        <input type="text" class="form-control rounded" value="${keyword}" 
-                               placeholder="Nhập tên ứng viên" name="keyword"/>
-                    </div>
-                    <div class="col-5 p-1">
-                        <select class="form-control" name="career">
-                            <option value="0" selected>Chọn ngành nghề</option>
-                            <c:forEach items="${career}" var="c">
-                                <option value="${c.id}">${c.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="col-1 p-1">
-                        <button type="submit" class="btn btn-success border-0">
-                            Tìm
-                        </button>
-                    </div>
+                <div id="search-applicant">
+                    <h3>Tìm kiếm ứng viên</h3>
+                    <form class="row" action="<c:url value="/employer/search-app/"/>" method="GET">
+                        <div class="col-6 p-1">
+                            <input type="text" class="form-control rounded" value="${keyword}" 
+                                   placeholder="Nhập tên ứng viên" name="keyword"/>
+                        </div>
+                        <div class="col-5 p-1">
+                            <select class="form-control" name="career">
+                                <option value="0" selected>Chọn ngành nghề</option>
+                                <c:forEach items="${career}" var="c">
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col-1 p-1">
+                            <button type="submit" class="btn btn-success border-0">
+                                Tìm
+                            </button>
+                        </div>
+                    </form>
                     <c:forEach items="${applicantList}" var="a">
-                        <div class="">${a.user.name}</div>
+                        <div class="row">${a.user.name}</div>
                     </c:forEach>
-                </form>
+                </div>
             </c:when>
         </c:choose>
     </div>

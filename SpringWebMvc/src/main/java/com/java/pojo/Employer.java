@@ -1,6 +1,7 @@
 package com.java.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +24,8 @@ public class Employer implements Serializable {
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
+    @OneToMany(mappedBy = "employer")
+    private Set<News> news;
 
     public int getId() {
         return id;
@@ -55,4 +58,13 @@ public class Employer implements Serializable {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public Set<News> getNews() {
+        return news;
+    }
+
+    public void setNews(Set<News> news) {
+        this.news = news;
+    }
+    
 }
