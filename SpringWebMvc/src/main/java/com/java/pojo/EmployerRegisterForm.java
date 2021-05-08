@@ -1,5 +1,6 @@
 package com.java.pojo;
 
+import com.java.validator.EmployerRegister;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Size;
  *
  * @author minh
  */
+@EmployerRegister
 public class EmployerRegisterForm {
 
     @Size(min = 5, max = 20, message = "{error.invalid.username.size}")

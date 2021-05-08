@@ -6,7 +6,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="text-primary">${apply}</div>
+<c:if test="${apply}">
+    <p class="text-primary">Ứng tuyển thành công</p>
+</c:if>
 <div>
     <h4 class="text-center p-3">Danh sách các bài đã nộp</h4>
     <div class="row">

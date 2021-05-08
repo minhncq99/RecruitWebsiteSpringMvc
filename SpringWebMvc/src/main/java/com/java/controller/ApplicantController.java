@@ -49,6 +49,10 @@ public class ApplicantController {
             @RequestParam(value = "news") String news){
         model.addAttribute("news", 
                 this.applicantNewsService.getNewsApplyByUserName(auth.getName()));
+        model.addAttribute("employer", this.employerService.recommendEmployer(
+            this.applicantService.getApplicantByUserName(auth.getName()).getCareer().getId()));
+        model.addAttribute("news", 
+                this.applicantNewsService.getNewsApplyByUserName(auth.getName()));
         int newsId = !news.matches("[0-9]+") ? 0 : (Integer.parseInt(news) > 0) ?
                 Integer.parseInt(news) : -Integer.parseInt(news);
         boolean result = (newsId == 0) ? false : this.applicantNewsService.addApplicantNews(username, newsId);

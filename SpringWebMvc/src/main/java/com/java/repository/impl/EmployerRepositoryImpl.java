@@ -57,9 +57,10 @@ public class EmployerRepositoryImpl implements EmployerRepository {
                 throw new HibernateException("Không thể tìm thấy tỉnh thành!");
             
             employer.setLocation(location);
-            this.userService.addUser(user);
-            session.save(employer);
-            
+            if (!this.userService.addUser(user)) {
+                return false;
+            }
+            session.save(employer);            
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();

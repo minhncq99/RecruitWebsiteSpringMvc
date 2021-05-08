@@ -33,7 +33,7 @@
                                     <option value="${c.id}">${c.name}</option>
                                 </c:otherwise>
                             </c:choose>
-                            
+
                         </c:forEach>
                     </select>
                     <h6>Tỉnh thành</h6>
@@ -120,7 +120,13 @@
                                 <a href="<c:url value="/news-details?newsid=${n.id}" />"><h4>${n.name}</h4></a>
                                 <p>Ngành nghề: ${n.career.name}</p>
                                 <p>Nơi làm việc: ${n.location.name}</p>
-                                <p><button class="button">Ứng tuyển</button></p>
+                                <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
+                                    <form method="POST" action="<c:url value="/applicant/apply?news=${n.id}&username=${pageContext.request.userPrincipal.name}" />">
+                                        <button type="submit" class="button">Ứng tuyển</button></p>
+                                    </form>
+                                <% } else { %>
+                                    <p><button class="button" disabled>Vui lòng đăng nhập tài khoản ứng viên</button></p>
+                                <% }%>
                             </div>
                         </div>
                     </div>
@@ -130,25 +136,25 @@
     </div>
 </div>
 <nav aria-label="pagination" class="d-flex justify-content-end">
-<ul class="pagination">
-    <li class="page-item ${previous}">
-        <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select -1}'/>'/>">Previous</a>
-    </li>
-    <c:forEach items="${listPage}" var="l">
-        <c:choose>
-            <c:when test="${l == select}">
-                <li class="page-item active">
-                    <a class="page-link" href="#">${l} <span class="sr-only">(current)</span></a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li class="page-item"><a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${l}'/>">${l}</a></li>
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
-    <li class="page-item ${next}">
-        <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select +1}'/>">Next</a>
-    </li>
-</ul>
+    <ul class="pagination">
+        <li class="page-item ${previous}">
+            <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select -1}'/>'/>">Previous</a>
+        </li>
+        <c:forEach items="${listPage}" var="l">
+            <c:choose>
+                <c:when test="${l == select}">
+                    <li class="page-item active">
+                        <a class="page-link" href="#">${l} <span class="sr-only">(current)</span></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item"><a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${l}'/>">${l}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        <li class="page-item ${next}">
+            <a class="page-link" href="<c:url value='/search/news/?keyword=${keyword}&career=${careerId}&location=${locationId}&page=${select +1}'/>">Next</a>
+        </li>
+    </ul>
 </nav>
 <script src="<c:url value="/resources/js/company.js"/>"></script>
