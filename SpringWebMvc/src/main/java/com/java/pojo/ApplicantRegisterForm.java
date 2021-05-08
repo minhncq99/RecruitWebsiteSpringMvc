@@ -1,7 +1,7 @@
 package com.java.pojo;
 
+import com.java.validator.ApplicantRegister;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author minh
  */
+@ApplicantRegister
 public class ApplicantRegisterForm {
     
     @Size(min = 5, max = 20, message = "{error.invalid.username.size}")

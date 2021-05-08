@@ -33,7 +33,9 @@ public class UserRepositoryImpl  implements UserRepository {
     @Transactional
     public boolean addUser(User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+        if (this.getUsers(user.getUserName()).size() != 0) {
+            return false;
+        }
         try {
            user.setPassword(this.passwordEncoder.encode(user.getPassword()));
            session.save(user);

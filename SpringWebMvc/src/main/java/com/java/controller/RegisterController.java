@@ -67,7 +67,8 @@ public class RegisterController {
             return "register";
         }
         if (!this.employerService.addEmployer(employer)) {
-            return "redirect:/register/empl";
+            model.addAttribute("otherError", "Tao tác thêm nhà tuyển dụng chưa thành công vui long thử lại");
+            return "register";
         }
         return "redirect:/";
     }
@@ -91,6 +92,7 @@ public class RegisterController {
             }
         }
         if (!this.applicantService.addApplicant(applicant)) {
+            model.addAttribute("otherError", "Tao tác thêm nhà ứng viên chưa thành công vui long thử lại");
             return "register";
         }
         return "redirect:/";

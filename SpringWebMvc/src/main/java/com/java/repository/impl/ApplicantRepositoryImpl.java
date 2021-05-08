@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-
 /**
  *
  * @author minh
@@ -33,12 +32,12 @@ public class ApplicantRepositoryImpl implements ApplicantRepository {
     private UserService userService;
     @Autowired
     private CareerService careerService;
-    
+
     @Override
     @Transactional
     public boolean addApplicant(ApplicantRegisterForm applicantRegister) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         // Create user
         User user = new User();
         user.setUserName(applicantRegister.getUsername());
@@ -46,22 +45,25 @@ public class ApplicantRepositoryImpl implements ApplicantRepository {
         user.setEmail(applicantRegister.getEmail());
         user.setName(applicantRegister.getName());
         user.setRole("ROLE_APPLICANT");
-        
+
         // Create Applicant
         Applicant applicant = new Applicant();
         applicant.setGender(applicantRegister.getGender());
         applicant.setDescription(applicantRegister.getDescription());
         applicant.setExperiance(applicantRegister.getExperiance());
         applicant.setUser(user);
-        
+
         Career career = this.careerService.getCareerById(applicantRegister.getCareerId());
         try {
-            if (career == null)
+            if (career == null) {
                 throw new HibernateException("Không thể tìm thấy ngành nghề");
+            }
             applicant.setCareer(career);
-            this.userService.addUser(user);
+            if (!this.userService.addUser(user)) {
+                return false;
+            }
             session.save(applicant);
-            
+
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -73,16 +75,16 @@ public class ApplicantRepositoryImpl implements ApplicantRepository {
     @Transactional
     public Applicant getApplicantByUserName(String applicantUserName) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Applicant> query = builder.createQuery(Applicant.class);
         Root<Applicant> root = query.from(Applicant.class);
         query.select(root);
         Predicate predicate = builder.equal(root.join("user").get("userName").as(String.class), applicantUserName);
         query.where(predicate);
-        
+
         Query result = session.createQuery(query);
         return (Applicant) result.getResultList().get(0);
     }
-    
+
 }

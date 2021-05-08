@@ -24,6 +24,8 @@
                              src="<c:url value="/resources/images/user.png" />" 
                              alt="logo">
                     </div>
+                    <form:errors path="*" cssClass="text-danger" />
+                    <div class="text-danger">${otherError}</div>
                     <div class="form-group">
                         <form:label path="username">Tên đăng nhập</form:label>
                         <form:input path="username" class="form-control" type="text" />
@@ -89,6 +91,8 @@
                              src="<c:url value="/resources/images/manager.png" />" 
                              alt="logo">
                     </div>
+                    <form:errors path="*" cssClass="text-danger" />
+                    <div class="text-danger">${otherError}</div>
                     <div class="form-group">
                         <form:label path="userName">Tên đăng nhập</form:label>
                         <form:input path="userName" cssClass="form-control" type="text"/>
