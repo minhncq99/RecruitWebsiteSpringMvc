@@ -2,6 +2,7 @@ package com.java.repository.impl;
 
 import com.java.pojo.ApplicantNews;
 import com.java.pojo.News;
+import com.java.pojo.Applicant;
 import com.java.repository.ApplicantNewsRepository;
 import com.java.repository.ApplicantRepository;
 import com.java.repository.NewsRepository;
@@ -37,10 +38,13 @@ public class ApplicantNewsRepositoryImpl implements ApplicantNewsRepository {
     @Transactional
     public boolean addApplicantNews(String applicantUserName, int newsId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+        Applicant applicant = this.applicantRepository.getApplicantByUserName(applicantUserName);
+        if (this.getNewsApplyByBothId(applicant.getId(), newsId) !=  null) {
+            return false;
+        }
         ApplicantNews applicantNews = new ApplicantNews();
         applicantNews.setDate(new Date());
-        applicantNews.setApplicant(this.applicantRepository.getApplicantByUserName(applicantUserName));
+        applicantNews.setApplicant(applicant);
         applicantNews.setNews(this.newsRepository.getNewsById(newsId));
         try {
             session.save(applicantNews);
@@ -67,5 +71,26 @@ public class ApplicantNewsRepositoryImpl implements ApplicantNewsRepository {
         Query result = session.createQuery(query);
         
         return result.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public ApplicantNews getNewsApplyByBothId(int applicantId, int newsId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ApplicantNews> query = builder.createQuery(ApplicantNews.class);
+        Root<ApplicantNews> root = query.from(ApplicantNews.class);
+        
+        Predicate predicateApplicant = builder.equal(root.join("applicant")
+                .get("id").as(Integer.class), applicantId);
+        Predicate predicateNews = builder.equal(root.join("news")
+                .get("id").as(Integer.class), newsId);
+        
+        Predicate predicate = builder.and(predicateApplicant, predicateNews);
+        query.where(predicate);
+        Query result = session.createQuery(query);
+        
+        return (result.getResultList().size() == 0) ? null : (ApplicantNews) result.getResultList().get(0);
     }
 }
