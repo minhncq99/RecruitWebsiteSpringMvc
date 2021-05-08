@@ -10,4 +10,5 @@ import com.java.pojo.News;
 public interface ApplicantNewsRepository {
     boolean addApplicantNews(String applicantUserName, int newsId);
     List<News> getNewsApplyByUserName(String userName);
+    ApplicantNews getNewsApplyByBothId(int applicantId, int newsId);
 }

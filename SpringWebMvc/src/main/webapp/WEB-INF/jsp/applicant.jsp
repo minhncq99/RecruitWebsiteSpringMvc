@@ -9,6 +9,9 @@
 <c:if test="${apply}">
     <p class="text-primary">Ứng tuyển thành công</p>
 </c:if>
+<c:if test="${apply == false}">
+    <p class="text-danger">Ứng tuyển không thành công, có thể bạn đã ứng tuyển</p>
+</c:if>
 <div>
     <h4 class="text-center p-3">Danh sách các bài đã nộp</h4>
     <div class="row">
