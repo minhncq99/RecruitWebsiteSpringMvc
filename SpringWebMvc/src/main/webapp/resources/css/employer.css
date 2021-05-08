@@ -4,9 +4,11 @@
 */
 #employer-header {
     position: relative;
-    height: 150px;
+    height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-size: 70% 100%;
+    background-position: center;
 }
 
 #employer-header::after {
@@ -15,14 +17,16 @@
     top: 0;
     left: 0;
     z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle ,rgba(255,255,255, 0.5), rgba(255,255,255, 1));
+    width: 60%;
+    height: 80%;
 }
 
 #employer-header h2{
     z-index: 2;
-    transform: translate(0, 30%);
+    /* transform: translate(0, 30%); */
+}
+#search-applicant {
+    margin-left: 2%;
 }
 
 #employer-content {   
@@ -96,4 +100,31 @@
     font-size: large;
     text-align: center;
     padding: 5px;
+}
+
+
+/* Profile Box in Search  */
+.card-container {
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	padding-top: 30px;
+	position: relative;
+	width: 250px;
+	max-width: 100%;
+	text-align: center;
+}
+
+.card-container .round {
+	border: 1px solid #03cb50;
+	border-radius: 50%;
+	padding: 7px;
+}
+.button-detail {
+	padding-bottom: 15px;
+    color: white;
+}
+.container-text p {
+    text-align: left;   
+    font-size: 14px;
+    padding-left: 5px;
 }

@@ -8,12 +8,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="employer-header" class="row d-flex justify-content-center text-center p-3 mb-4"
-     style="background-image:  url(<c:url value="/resources/images/employer_header.jpg"/>)">
-    <h2 class="col-6">Quản lý thông tin nhà tuyển dụng</h2>
+     style="background-image:  url(<c:url value="/resources/images/employerheader.png"/>)">
 </div>    
 <div id="employer-content" class="row d-flex justify-content-around text-center">
     <div class="col-3 text-center">
-        <div class="pt-1 pb-2">Công cụ</div>
+        <div class="pt-1 pb-2">Thao tác</div>
         <div>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
@@ -23,7 +22,7 @@
                 <div class="col-12">
                     <form class="form-group row justify-content-center">
                         <div class="col-8">
-                            <input class="form-control form-control-borderless" type="search" placeholder="Nhập vào tên bài đăng">
+                            <input class="form-control form-control-borderless" type="search" placeholder="Tên bài đăng">
                         </div>
                         <div class="col-4">
                             <button class="btn btn-success" type="submit">Search</button>
@@ -37,10 +36,10 @@
         <c:choose>
             <%-- Create News --%>
             <c:when test="${action == null}">
-                <h3 class="p-3">Đăng tin mới</h3>
                 ${addError}
                 ${addSuccess}
                 <form:form id="addNews" method="POST" action="/SpringWebMvc/employer/addNews/" modelAttribute="news">
+                    <h3 class="p-3">Đăng bảng tin</h3>
                     <div class="form-group py-2">
                         <form:label path="name">Tên bài đăng</form:label>
                         <form:input path="name" class="form-control" type="text"/>
@@ -167,9 +166,25 @@
                             </button>
                         </div>
                     </form>
-                    <c:forEach items="${applicantList}" var="a">
-                        <div class="row">${a.user.name}</div>
-                    </c:forEach>
+                    <div class="row my-3">
+                        <c:forEach items="${applicantList}" var="a">
+                            <div class="col-4">
+                                <div class="card-container">
+                                    <img class="round" src="<c:url value="/resources/images/user_profile_img.png" />" alt="user">
+                                    <div class="container-text">
+                                        <h5>${a.user.name}</h5>
+                                        <p>Email: ${a.user.email}</p>
+                                        <p>Experience: ${a.experiance}</p>
+                                        <p>Description: ${a.description}</p>
+                                    </div>
+                                    <div class="button-detail">
+                                        <a type="button" class="btn btn-success">More</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </c:when>
         </c:choose>
