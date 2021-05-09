@@ -89,7 +89,7 @@
 
 </div>
 
-<!-- Container (TOUR Section) 
+<!-- Container (TOUR Section)  -->
 <div id="tour" class="bg-1">
     <div class="container">
         <h3 class="text-center">TOUR DATES</h3>
@@ -117,4 +117,4 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>

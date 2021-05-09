@@ -12,19 +12,88 @@
 <c:if test="${apply == false}">
     <p class="text-danger">Ứng tuyển không thành công, có thể bạn đã ứng tuyển</p>
 </c:if>
+<div class="main">
+    <div class="main-content">  
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="80">
+                            <div class="mt-2">
+                                <h5>{Name}</h5>
+                                <p class="text-muted font-size-xs">{Ngành nghề}</p>
+                                <button class="btn btn-success">{CV}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {Name}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {Email}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Kinh nghiệm</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {Experience}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Mô tả</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {Description}
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
     <h4 class="text-center p-3">Danh sách các bài đã nộp</h4>
     <div class="row">
-        <c:forEach items="${news}" var="n">
-            <div class="col-4 p-2">
-                <div class="border rounded p-2 cell">
-                    <h4>${n.name}</h4>
-                    <p>Mức lương: ${n.salary}</p>
-                    <p>Nơi làm việc: ${n.location.name}</p>
-                    <p>Ngành nghề: ${n.career.name}</p>
-                </div>
-            </div>
-        </c:forEach>
+        <table class="table">
+            <tr>
+                <th>Tên bài đăng</th>
+                <th>Nơi làm việc</th>
+                <th>Mức lương</th>
+                <th>Ngành nghề</th>
+                <th>Mô tả</th>
+            </tr>
+            <c:forEach items="${news}" var="n">
+            <tr>
+                <td>${n.name}</td> 
+                <td>${n.location.name}</td> 
+                <td>${n.salary}</td> 
+                <td>${n.career.name}</td>
+                <td>${n.description}</td>
+            </tr>
+            </c:forEach>
+        </table>
     </div>
     <h4 class="text-center p-3">Công ty có thể phù hợp với bạn</h4>
     <div class="row">

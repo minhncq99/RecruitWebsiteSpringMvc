@@ -103,24 +103,31 @@
             <c:when test="${action == 'history'}">
                 <%-- History --%>
                 <h3 class="p-3">Lịch sử bài đăng</h3>
-                <c:forEach items="${newsList}" var="n">
-                    <div class="news-container">
-                        <div class="news-title">${n.name}</div>
-                        <div class="row">
-                            <div class="col-6 text-left">
-                                <p>Mức lương: ${n.salary}</p>
-                                <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
-                                <p>Ngành nghề: ${n.career.name}</p>
-                                <p>Nơi làm việc: ${n.location.name}</p>
-                            </div>
-                            <div class="col-6 text-right">
-                                <p>Hình thức làm việc: ${n.typeWorking}</p>
-                                <p>Ngày bắt đầu: ${n.timeStart}</p>
-                                <p>Ngày kết thúc: ${n.timeStart}</p>
+                <div class="row my-4">
+                    <c:forEach items="${newsList}" var="n">
+                        <div class="col-6">
+                            <div class="card-news">
+                                <div class="additional">
+                                    <div class="user-card">${n.name}</div>
+                                    <div class="more-info">
+                                        <div>
+                                            <p>Chức vụ: ${n.typeWorking}</p>
+                                            <p>Ngày bắt đầu: ${n.timeStart}</p>
+                                            <p>Ngày kết thúc: ${n.timeStart}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="general">
+                                    <h3>${n.name}</h3>
+                                    <p>Mức lương: ${n.salary}</p>
+                                    <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
+                                    <p>Ngành: ${n.career.name}</p>
+                                    <p>Nơi làm việc: ${n.location.name}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
                 <nav aria-label="pagination" class="d-flex justify-content-end">
                     <ul class="pagination">
                         <li class="page-item ${previous}">
@@ -175,13 +182,13 @@
                                         <h5>${a.user.name}</h5>
                                         <p>Email: ${a.user.email}</p>
                                         <p>Experience: ${a.experiance}</p>
+                                        <p>Career: ${a.career.name}</p>
                                         <p>Description: ${a.description}</p>
                                     </div>
                                     <div class="button-detail">
                                         <a type="button" class="btn btn-success">More</a>
                                     </div>
-                                </div>
-                                
+                                </div>   
                             </div>
                         </c:forEach>
                     </div>
