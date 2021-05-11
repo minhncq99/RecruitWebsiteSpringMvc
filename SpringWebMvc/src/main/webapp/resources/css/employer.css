@@ -10,7 +10,6 @@
     background-size: 70% 100%;
     background-position: center;
 }
-
 #employer-header::after {
     content: '';
     position: absolute;
@@ -20,7 +19,6 @@
     width: 60%;
     height: 80%;
 }
-
 #employer-header h2{
     z-index: 2;
     /* transform: translate(0, 30%); */
@@ -32,7 +30,6 @@
 #employer-content {   
     min-height: 500px;
 }
-
 #employer-content>div:first-child {
     position: relative;
     border-top-left-radius: 3px;
@@ -42,16 +39,13 @@
     height: 100%;
     padding: 0;
 }
-
 #employer-content>div:first-child>div:first-child {
     background-color: rgb(240, 240, 240);
     border-bottom: 1px solid rgb(230, 230, 230);
 }
-
 #employer-content>div:first-child>div:last-child {
     margin: 0 20px;
 }
-
 #employer-content>div:first-child>div:last-child>.form-control {
     margin: 5px 0;
 }
@@ -102,7 +96,6 @@
     padding: 5px;
 }
 
-
 /* Profile Box in Search  */
 .card-container {
 	border-radius: 5px;
@@ -113,7 +106,6 @@
 	max-width: 100%;
 	text-align: center;
 }
-
 .card-container .round {
 	border: 1px solid #03cb50;
 	border-radius: 50%;
@@ -129,8 +121,6 @@
     padding-left: 5px;
 }
 
-
-
 /* History of the news  */
 .card-news {
     width: 400px;
@@ -142,11 +132,11 @@
     overflow: hidden;
     position: relative;
     margin: 1.5rem;
-  }
-  .card-news h1 {
+}
+.card-news h1 {
     text-align: center;
-  }
-  .card-news .additional {
+}
+.card-news .additional {
     position: absolute;
     width: 30px;
     height: 100%;
@@ -155,37 +145,35 @@
     overflow: hidden;
     z-index: 2;
     padding-top: 2rem;
-  }
-  .card-news:hover .additional {
+}
+.card-news:hover .additional {
     width: 100%;
-  }
-  .card-news .additional .more-info {
+}
+.card-news .additional .more-info {
     /* width: 300px; */
     float: left;
     position: absolute;
-    left: 150px;
+    left: 50px;
     height: 100%;
-  }
-  
-  .card-news .general {
-    width: 410px;
+}
+.card-news .general {
+    width: 445px;
     height: 100%;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     right: 0;
     z-index: 1;
     box-sizing: border-box;
     padding: 5rem;
     padding-top: 2rem;
-  }
-  .card-news .additional .user-card {
-    width: 140px;
+}
+.card-news .additional .user-card {
+    width: 60px;
     height: 100%;
     position: relative;
     float: left;
 }
-  
-  .card-news .additional .user-card::after {
+.card-news .additional .user-card::after {
     content: "";
     display: block;
     position: absolute;
@@ -193,4 +181,7 @@
     right: -2px;
     height: 80%;
     border-left: 2px solid rgba(0,0,0,0.025);
-  }
+}
+.card-news p {
+    font-size: 15px;
+}

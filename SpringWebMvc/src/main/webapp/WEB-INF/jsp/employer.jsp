@@ -108,19 +108,20 @@
                         <div class="col-6">
                             <div class="card-news">
                                 <div class="additional">
-                                    <div class="user-card">${n.name}</div>
+                                    <div class="user-card"></div>
                                     <div class="more-info">
                                         <div>
                                             <p>Chức vụ: ${n.typeWorking}</p>
-                                            <p>Ngày bắt đầu: ${n.timeStart}</p>
-                                            <p>Ngày kết thúc: ${n.timeStart}</p>
+                                            <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
+                                            <p>Mức lương: ${n.salary}</p>
+                                            <p>Chi tiết: ${n.description}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="general">
-                                    <h3>${n.name}</h3>
-                                    <p>Mức lương: ${n.salary}</p>
-                                    <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
+                                    <h5>${n.name}</h5>
+                                    <p>Ngày bắt đầu: ${n.timeStart}</p>
+                                    <p>Ngày kết thúc: ${n.timeStart}</p>
                                     <p>Ngành: ${n.career.name}</p>
                                     <p>Nơi làm việc: ${n.location.name}</p>
                                 </div>

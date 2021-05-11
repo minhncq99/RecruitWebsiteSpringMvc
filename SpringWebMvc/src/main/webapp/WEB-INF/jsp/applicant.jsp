@@ -19,10 +19,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="80">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="100">
                             <div class="mt-2">
-                                <h6>{Name}</h6>
-                                <p class="text-muted font-size-xs">{Ngành nghề}</p>
+                                <h6>${applicant.user.userName}</h6>
                             </div>
                         </div>
                     </div>
@@ -47,7 +46,7 @@
                         <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {Name}
+                        ${applicant.user.name}
                     </div>
                     </div>
                     <hr>
@@ -56,8 +55,17 @@
                         <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {Email}
+                        ${applicant.user.email}
                     </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Ngành nghề</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            ${applicant.career.name}
+                        </div>
                     </div>
                     <hr>
                     <div class="row">
@@ -65,7 +73,7 @@
                         <h6 class="mb-0">Kinh nghiệm</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {Experience}
+                        ${applicant.experiance}
                     </div>
                     </div>
                     <hr>
@@ -74,7 +82,7 @@
                         <h6 class="mb-0">Mô tả</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {Description}
+                        ${applicant.description}
                     </div>
                     </div>
                 </div>
@@ -91,7 +99,6 @@
                 <th>Tên bài đăng</th>
                 <th>Nơi làm việc</th>
                 <th>Mức lương</th>
-                <th>Ngành nghề</th>
                 <th>Mô tả</th>
             </tr>
             <c:forEach items="${news}" var="n">
@@ -99,7 +106,6 @@
                 <td>${n.name}</td> 
                 <td>${n.location.name}</td> 
                 <td>${n.salary}</td> 
-                <td>${n.career.name}</td>
                 <td>${n.description}</td>
             </tr>
             </c:forEach>
@@ -107,11 +113,19 @@
     </div>
     <h4 class="text-center p-3">Công ty có thể phù hợp với bạn</h4>
     <div class="row">
+        
+    </div>
+</div>
+
+<div class="details">
+    <div class="box">
         <c:forEach items="${employer}" var="e">
-            <div class="col-4 p-2">
-                <div class="border rounded p-2 cell">
-                    <h4>${e.user.name}</h4>
-                </div>
+            <div class="detail">
+                <p>${e.user.name}</p>
+            <div class="content-detail">
+                Contact email: ${e.user.email}
+            </div>
+            <a href="<c:url value="/news/" />">Read More</a>
             </div>
         </c:forEach>
     </div>

@@ -34,7 +34,7 @@ public class NewsController {
     
     @RequestMapping("")
     public String news(Model model) {
-        model.addAttribute("cssfile", "news");
+        model.addAttribute("cssfile", "company");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());
         model.addAttribute("news", newsService.getNewgestNews(1, 8));

@@ -8,7 +8,7 @@
             <div class="card">
                 <img id="imgCard" src="<c:url value="/resources/images/company.png" />" alt="sps">
                 <div class="container">
-                    <a href="<c:url value="/news-details?newsid=${n.id}" />"><h4>Tuyển dụng ${n.employer.user.name}</h4></a>
+                    <a href="<c:url value="/news-details?newsid=${n.id}" />"><h4>${n.employer.user.name}</h4></a>
                     <p>Ngành nghề: ${n.career.name}</p>
                     <p>Nơi làm việc: ${n.location.name}</p>
                     <p>Chức vụ: ${n.typeWorking}</p>
