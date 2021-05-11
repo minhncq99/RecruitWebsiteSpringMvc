@@ -27,14 +27,6 @@
         <put-attribute name="title" value="Company" />
         <put-attribute name="content" value="/WEB-INF/jsp/company.jsp" />
     </definition>
-    <definition name="profile" extends="baseLayout">
-        <put-attribute name="title" value="Profile" />
-        <put-attribute name="content" value="/WEB-INF/jsp/profile.jsp" />
-    </definition> 
-    <definition name="job" extends="baseLayout">
-        <put-attribute name="title" value="Job" />
-        <put-attribute name="content" value="/WEB-INF/jsp/job.jsp" />
-    </definition>
     <definition name="contact" extends="baseLayout">
         <put-attribute name="title" value="Contact" />
         <put-attribute name="content" value="/WEB-INF/jsp/contact.jsp" />
@@ -58,5 +50,9 @@
     <definition name="newsdetail" extends="baseLayout">
         <put-attribute name="title" value="Tin tức" />
         <put-attribute name="content" value="/WEB-INF/jsp/newsdetails.jsp" />
+    </definition>
+    <definition name="news" extends="baseLayout">
+        <put-attribute name="title" value="Tin tức" />
+        <put-attribute name="content" value="/WEB-INF/jsp/news.jsp" />
     </definition>
 </tiles-definitions>

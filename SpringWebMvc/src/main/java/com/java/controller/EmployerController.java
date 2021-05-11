@@ -99,11 +99,15 @@ public class EmployerController {
         } 
         newsForm.setUsernameEmployer(auth.getName());
         if (!this.newsService.addNews(newsForm)) {
-            model.addAttribute("addError", "Đăng bản tuyển dụng không thành công");
+            model.addAttribute("addError", "Đăng bảng tin không thành công");
             return "employer";
         }
-        model.addAttribute("addSuccess", "Đã đăng bản tuyển dụng thành công");
+        model.addAttribute("addSuccess", "Đăng bảng tin thành công");
         return "employer";
+    }
+    @RequestMapping("/chart")
+    public String chart(Model model) {
+        return "chart";
     }
              
     private void addFormModel(Model model) {

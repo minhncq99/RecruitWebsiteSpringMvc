@@ -14,9 +14,13 @@
         </div>
         <nav class="header-navigation">
             <a class="nav-link" href="<c:url value="/" />">Trang chủ</a>
-            <a class="nav-link" href="<c:url value="/job/" />">Tìm việc</a>
-            <a class="nav-link" href="<c:url value="/company/" />">Công ty</a>
-            <a class="nav-link" href="<c:url value="/" />">Đăng tin</a>
+            <a class="nav-link" href="<c:url value="/company/" />">Tìm việc</a>
+            <% if (request.isUserInRole("ROLE_EMPLOYER")) { %>
+                <a class="nav-link" href="<c:url value="/employer/" />">Đăng tin</a>
+            <% } %>
+            <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
+                <a class="nav-link" href="<c:url value="/news/" />">Bảng tin</a>
+            <% }%>
             <a class="nav-link" href="<c:url value="/contact/" />">Liên hệ</a>
             <button>Menu</button>
         </nav>
@@ -35,12 +39,11 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <% if (request.isUserInRole("ROLE_EMPLOYER")) { %>
                                 <a class="dropdown-item" href="<c:url value="/employer/" />">Trang cá nhân</a>
-                                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                                <a class="dropdown-item" href="<c:url value="/employer/chart/" />">Thống kê</a>
                             <% } %>
                             <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
                                 <a class="dropdown-item" href="<c:url value="/applicant/" />">Trang cá nhân</a>
-                                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
-                                <a class="dropdown-item" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>">CV</a>
+                                <a class="dropdown-item" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>" target="_blank">CV</a>
                             <% }%>
                             <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
                         </div>

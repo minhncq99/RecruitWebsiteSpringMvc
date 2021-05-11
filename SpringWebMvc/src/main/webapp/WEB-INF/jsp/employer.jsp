@@ -8,12 +8,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="employer-header" class="row d-flex justify-content-center text-center p-3 mb-4"
-     style="background-image:  url(<c:url value="/resources/images/employer_header.jpg"/>)">
-    <h2 class="col-6">Quản lý thông tin nhà tuyển dụng</h2>
+     style="background-image:  url(<c:url value="/resources/images/employerheader.png"/>)">
 </div>    
 <div id="employer-content" class="row d-flex justify-content-around text-center">
     <div class="col-3 text-center">
-        <div class="pt-1 pb-2">Công cụ</div>
+        <div class="pt-1 pb-2">Thao tác</div>
         <div>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
@@ -23,7 +22,7 @@
                 <div class="col-12">
                     <form class="form-group row justify-content-center">
                         <div class="col-8">
-                            <input class="form-control form-control-borderless" type="search" placeholder="Nhập vào tên bài đăng">
+                            <input class="form-control form-control-borderless" type="search" placeholder="Tên bài đăng">
                         </div>
                         <div class="col-4">
                             <button class="btn btn-success" type="submit">Search</button>
@@ -37,10 +36,10 @@
         <c:choose>
             <%-- Create News --%>
             <c:when test="${action == null}">
-                <h3 class="p-3">Đăng tin mới</h3>
                 ${addError}
                 ${addSuccess}
                 <form:form id="addNews" method="POST" action="/SpringWebMvc/employer/addNews/" modelAttribute="news">
+                    <h3 class="p-3">Đăng bảng tin</h3>
                     <div class="form-group py-2">
                         <form:label path="name">Tên bài đăng</form:label>
                         <form:input path="name" class="form-control" type="text"/>
@@ -104,24 +103,31 @@
             <c:when test="${action == 'history'}">
                 <%-- History --%>
                 <h3 class="p-3">Lịch sử bài đăng</h3>
-                <c:forEach items="${newsList}" var="n">
-                    <div class="news-container">
-                        <div class="news-title">${n.name}</div>
-                        <div class="row">
-                            <div class="col-6 text-left">
-                                <p>Mức lương: ${n.salary}</p>
-                                <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
-                                <p>Ngành nghề: ${n.career.name}</p>
-                                <p>Nơi làm việc: ${n.location.name}</p>
-                            </div>
-                            <div class="col-6 text-right">
-                                <p>Hình thức làm việc: ${n.typeWorking}</p>
-                                <p>Ngày bắt đầu: ${n.timeStart}</p>
-                                <p>Ngày kết thúc: ${n.timeStart}</p>
+                <div class="row my-4">
+                    <c:forEach items="${newsList}" var="n">
+                        <div class="col-6">
+                            <div class="card-news">
+                                <div class="additional">
+                                    <div class="user-card">${n.name}</div>
+                                    <div class="more-info">
+                                        <div>
+                                            <p>Chức vụ: ${n.typeWorking}</p>
+                                            <p>Ngày bắt đầu: ${n.timeStart}</p>
+                                            <p>Ngày kết thúc: ${n.timeStart}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="general">
+                                    <h3>${n.name}</h3>
+                                    <p>Mức lương: ${n.salary}</p>
+                                    <p>Kinh nghiệm yêu cầu: ${n.experiance}</p>
+                                    <p>Ngành: ${n.career.name}</p>
+                                    <p>Nơi làm việc: ${n.location.name}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
                 <nav aria-label="pagination" class="d-flex justify-content-end">
                     <ul class="pagination">
                         <li class="page-item ${previous}">
@@ -167,9 +173,25 @@
                             </button>
                         </div>
                     </form>
-                    <c:forEach items="${applicantList}" var="a">
-                        <div class="row">${a.user.name}</div>
-                    </c:forEach>
+                    <div class="row my-3">
+                        <c:forEach items="${applicantList}" var="a">
+                            <div class="col-4">
+                                <div class="card-container">
+                                    <img class="round" src="<c:url value="/resources/images/user_profile_img.png" />" alt="user">
+                                    <div class="container-text">
+                                        <h5>${a.user.name}</h5>
+                                        <p>Email: ${a.user.email}</p>
+                                        <p>Experience: ${a.experiance}</p>
+                                        <p>Career: ${a.career.name}</p>
+                                        <p>Description: ${a.description}</p>
+                                    </div>
+                                    <div class="button-detail">
+                                        <a type="button" class="btn btn-success">More</a>
+                                    </div>
+                                </div>   
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </c:when>
         </c:choose>
