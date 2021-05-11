@@ -11,18 +11,18 @@
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs pb-3" style="display: flex">
             <div style="margin-top: 20px">
-                <form action="/action_page.php">
+                <form method="GET" action="<c:url value="/search/news/"/>">
                     <h6>Tìm công việc phù hợp</h6>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm công việc">
+                        <input name="keyword" type="text" class="form-control" placeholder="Tìm kiếm công việc">
                     <h6>Ngành nghề</h6>
-                        <select class="form-control">Ngành nghề
-                            <option selected>Chọn ngành nghề</option>
+                        <select name="career" class="form-control">Ngành nghề
+                            <option value="" selected>Chọn ngành nghề</option>
                             <c:forEach items="${careers}" var="c">
                                 <option value="${c.id}">${c.name}</option>
                             </c:forEach>
                         </select>
-                    <h6>Tỉnh thành</h6>
-                        <select class="form-control">
+                        <h6>Tỉnh thành</h6>
+                        <select name="location" class="form-control">
                             <option selected>Chọn tỉnh thành</option>
                             <c:forEach items="${locations}" var="l">
                                 <option value="${l.id}">${l.name}</option>
@@ -62,9 +62,6 @@
                     <a class="prev" onclick="plusSlides(-1)">❮</a>
                     <a class="next" onclick="plusSlides(1)">❯</a>
                 </div>
-                <div class="caption-container">
-                  <p id="caption"></p>
-                </div>
 
                 <!-- Thumbnail images -->
                 <div class="row">
@@ -88,82 +85,6 @@
                     </div>                    
                 </div>      
             </div>
-            <br><br>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                      <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                      <div class="container">
-                        <h2>John Doe</h2>
-                        <p class="title">Designer</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                        <p>example@example.com</p>
-                        <p><button class="button">Contact</button></p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                      <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                      <div class="container">
-                        <h2>John Doe</h2>
-                        <p class="title">Designer</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                        <p>example@example.com</p>
-                        <p><button class="button">Contact</button></p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                    <div class="container">
-                      <h2>John Doe</h2>
-                      <p class="title">Designer</p>
-                      <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                      <p>example@example.com</p>
-                      <p><button class="button">Contact</button></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                    <div class="container">
-                      <h2>John Doe</h2>
-                      <p class="title">Designer</p>
-                      <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                      <p>example@example.com</p>
-                      <p><button class="button">Contact</button></p>
-                    </div>
-                  </div>
-                </div>    
-                <div class="col">
-                    <div class="card">
-                      <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                      <div class="container">
-                        <h2>John Doe</h2>
-                        <p class="title">Designer</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                        <p>example@example.com</p>
-                        <p><button class="button">Contact</button></p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                      <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
-                      <div class="container">
-                        <h2>John Doe</h2>
-                        <p class="title">Designer</p>
-                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                        <p>example@example.com</p>
-                        <p><button class="button">Contact</button></p>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>    
     </div>
 </div>

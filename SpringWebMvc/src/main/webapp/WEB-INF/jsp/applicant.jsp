@@ -21,12 +21,22 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="80">
                             <div class="mt-2">
-                                <h5>{Name}</h5>
+                                <h6>{Name}</h6>
                                 <p class="text-muted font-size-xs">{Ngành nghề}</p>
-                                <button class="btn btn-success">{CV}</button>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="formProfile">
+                    <c:choose>
+                        <c:when test="${pageContext.request.userPrincipal.name != null}">
+                            <div>
+                                <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
+                                    <a class="btn btn-success" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>" target="_blank">Click here to see CV</a>
+                                <% }%>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </div>
             </div>
             <div class="col-md-8">

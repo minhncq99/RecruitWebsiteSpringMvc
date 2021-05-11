@@ -115,11 +115,13 @@
                 <c:forEach items="${news}" var="n"> 
                     <div class="col-4 my-2">
                         <div class="card">
-                            <img src="<c:url value="/resources/images/sps.jpg" />" alt="sps" style="width:100%">
+                            <img id="imgCard" src="<c:url value="/resources/images/company.png" />" alt="sps">
                             <div class="container">
                                 <a href="<c:url value="/news-details?newsid=${n.id}" />"><h4>${n.name}</h4></a>
                                 <p>Ngành nghề: ${n.career.name}</p>
                                 <p>Nơi làm việc: ${n.location.name}</p>
+                                <p>Vị trí công việc: ${n.typeWorking}</p>
+                                <p>Yêu cầu kinh nghiệm: ${n.experiance}</p>
                                 <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
                                     <form method="POST" action="<c:url value="/applicant/apply?news=${n.id}&username=${pageContext.request.userPrincipal.name}" />">
                                         <button type="submit" class="button">Ứng tuyển</button></p>
