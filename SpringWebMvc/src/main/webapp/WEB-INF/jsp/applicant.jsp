@@ -118,8 +118,8 @@
 </div>
 
 <div class="details">
-    <div class="box">
-        <c:forEach items="${employer}" var="e">
+    <c:forEach items="${employer}" var="e">
+        <div class="box">
             <div class="detail">
                 <p>${e.user.name}</p>
             <div class="content-detail">
@@ -127,6 +127,6 @@
             </div>
             <a href="<c:url value="/news/" />">Read More</a>
             </div>
-        </c:forEach>
-    </div>
+        </div>
+    </c:forEach>
 </div>
