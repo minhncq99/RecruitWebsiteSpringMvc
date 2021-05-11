@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<div class="mx-auto" id="piechart" style="width: 900px; height: 500px;"></div>
+<script src="<c:url value="/resources/js/chart.js" />"></script>
 <div class="row my-3">
     <h4 class="col-12 text-center">Bản tin mới nhất</h4>
     <c:forEach items="${news}" var="n"> 
