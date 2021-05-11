@@ -105,6 +105,10 @@ public class EmployerController {
         model.addAttribute("addSuccess", "Đăng bảng tin thành công");
         return "employer";
     }
+    @RequestMapping("/chart")
+    public String chart(Model model) {
+        return "chart";
+    }
              
     private void addFormModel(Model model) {
         model.addAttribute("action", null);

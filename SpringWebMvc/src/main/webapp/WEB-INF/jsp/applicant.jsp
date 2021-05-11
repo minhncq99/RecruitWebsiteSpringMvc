@@ -32,7 +32,7 @@
                         <c:when test="${pageContext.request.userPrincipal.name != null}">
                             <div>
                                 <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
-                                    <a class="btn btn-success" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>" target="_blank">Click here to see CV</a>
+                                    <a class="btn btn-success" href="<c:url value='/resources/cv/${pageContext.request.userPrincipal.name}.pdf'/>" target="_blank">Click here to see your CV</a>
                                 <% }%>
                             </div>
                         </c:when>
