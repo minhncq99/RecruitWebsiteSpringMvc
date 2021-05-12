@@ -15,7 +15,7 @@
         <div class="pt-1 pb-2">Thao tác</div>
         <div>
             <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Đăng tin mới</a>
-            <a href="<c:url value='/employer/'/>" class="btn btn-primary form-control">Thống kê</a>
+            <a href="<c:url value='/employer/chart/'/>" class="btn btn-primary form-control">Thống kê</a>
             <a href="<c:url value='/employer/search-app'/>" class="btn btn-primary form-control">Tìm ứng viên</a>
             <a href="<c:url value='/employer/history'/>" class="btn btn-primary form-control">Lịch sử đăng tin</a>
             <div class="row justify-content-center">

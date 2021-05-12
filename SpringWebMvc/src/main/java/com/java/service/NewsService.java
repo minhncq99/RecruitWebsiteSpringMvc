@@ -13,5 +13,6 @@ public interface NewsService {
     List<News> getNewsByUser(String employerName, int page, int size);
     long getNumberNewsByUser(String employerName);
     List<News> getNewgestNews(int page, int size);
-    public News getNewsById(int id);
+    News getNewsById(int id);
+    List<News> getNewsByEmpoyerUsername(String employerUsername);
 }
