@@ -16,6 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `applicant`
+--
+
+DROP TABLE IF EXISTS `applicant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applicant` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gender` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiance` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `career_id` int NOT NULL,
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  KEY `applicant_career_idx` (`career_id`),
+  CONSTRAINT `applicant_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
+  CONSTRAINT `applicant_user` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `applicant`
 --
 
@@ -24,6 +46,27 @@ LOCK TABLES `applicant` WRITE;
 INSERT INTO `applicant` VALUES (1,'Nữ','Hoc tap va lam viec tai Thanh pho Ho Chi Minh','Dai hoc',14,'Claire'),(2,'Nữ','Khong','Cap 3',13,'john.nguyen'),(3,'Nữ','Doc sach, xem phim','Cao dang',18,'min.tran'),(4,'Nữ','Nghe nhac','Dai hoc',17,'phi.phuong.anh'),(5,'Nam','Lam viec va sinh song tai TPHCM','Dai hoc',14,'nguyenlinh'),(6,'Nam','Duoc pham','Thac Si',22,'tran.minh'),(7,'Nữ','Trinh do thac si tai My','Thac si chuyen vien tu van',18,'phuonganh.ngoc'),(8,'Nữ','Study at America','Cu nhan',14,'xuannguyen');
 /*!40000 ALTER TABLE `applicant` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `applicant_news`
+--
+
+DROP TABLE IF EXISTS `applicant_news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applicant_news` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `applicant_id` int NOT NULL,
+  `news_id` int NOT NULL,
+  `date` datetime NOT NULL,
+  `state` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `applicant_news_newsid_idx` (`news_id`),
+  KEY `applicant_news_applicantid_idx` (`applicant_id`),
+  CONSTRAINT `applicant_news_applicantid` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`),
+  CONSTRAINT `applicant_news_newsid` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `applicant_news`
@@ -36,6 +79,21 @@ INSERT INTO `applicant_news` VALUES (1,1,3,'2021-05-11 17:22:16',NULL),(2,1,1,'2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `career`
+--
+
+DROP TABLE IF EXISTS `career`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `career` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `career`
 --
 
@@ -44,6 +102,26 @@ LOCK TABLES `career` WRITE;
 INSERT INTO `career` VALUES (1,'An toàn lao động'),(2,'Bán hàng kỹ thuật'),(3,'Bán lẻ / bán sỉ'),(4,'Báo chí / Truyền hình'),(5,'Bảo hiểm'),(6,'Bảo trì / Sữa chữa'),(7,'Bất động sản'),(8,'Biên / Phiên dịch'),(9,'Bưu chính - Viễn thông'),(10,'Chứng khoán / Vàng / Ngoại tệ'),(11,'Cơ khí / Chế tạo / Tự động hóa'),(12,'Công nghệ cao'),(13,'Công nghệ Ô tô'),(14,'Công nghệ thông tin'),(15,'Dầu khí/Hóa chất'),(16,'Dệt may / Da giày'),(18,'Dịch vụ khách hàng'),(21,'Du lịch'),(22,'Dược phẩm / Công nghệ sinh học'),(17,'Địa chất / Khoáng sản'),(19,'Điện / Điện tử / Điện lạnh'),(20,'Điện tử viễn thông'),(23,'Giáo dục / Đào tạo'),(24,'Hàng cao cấp'),(25,'Hàng gia dụng'),(26,'Hàng hải'),(27,'Hàng không'),(28,'Hàng tiêu dùng'),(29,'Hành chính / Văn phòng'),(30,'Hoá học / Sinh học'),(31,'Hoạch định/Dự án'),(32,'In ấn / Xuất bản'),(33,'IT Phần cứng / Mạng'),(34,'IT phần mềm'),(35,'Kế toán / Kiểm toán'),(36,'Khách sạn / Nhà hàng'),(37,'Kiến trúc'),(38,'Kinh doanh / Bán hàng'),(39,'Logistics'),(40,'Luật/Pháp lý'),(41,'Marketing / Truyền thông / Quảng cáo'),(42,'Môi trường / Xử lý chất thải'),(43,'Mỹ phẩm / Trang sức'),(44,'Mỹ thuật / Nghệ thuật / Điện ảnh'),(45,'Ngân hàng / Tài chính'),(46,'Ngành nghề khác'),(47,'NGO / Phi chính phủ / Phi lợi nhuận'),(48,'Nhân sự'),(49,'Nông / Lâm / Ngư nghiệp'),(50,'Phi chính phủ / Phi lợi nhuận'),(51,'Quản lý chất lượng (QA/QC)'),(52,'Quản lý điều hành'),(53,'Sản phẩm công nghiệp'),(54,'Sản xuất'),(56,'Spa / Làm đẹp'),(57,'Tài chính / Đầu tư'),(58,'Thiết kế đồ họa'),(59,'Thiết kế nội thất'),(60,'Thời trang'),(61,'Thư ký / Trợ lý'),(62,'Thực phẩm / Đồ uống'),(63,'Tổ chức sự kiện / Quà tặng'),(64,'Tư vấn'),(65,'Vận tải / Kho vận'),(66,'Xây dựng'),(67,'Xuất nhập khẩu'),(68,'Y tế / Dược');
 /*!40000 ALTER TABLE `career` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `employer`
+--
+
+DROP TABLE IF EXISTS `employer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employer` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location_id` int NOT NULL,
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  KEY `employer_location_idx` (`location_id`),
+  CONSTRAINT `employer_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `employer_user` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `employer`
@@ -56,6 +134,21 @@ INSERT INTO `employer` VALUES (2,'Cong ty xuat nhap khau my pham Kelvin',5,'Kelv
 UNLOCK TABLES;
 
 --
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `location` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `location`
 --
 
@@ -66,6 +159,35 @@ INSERT INTO `location` VALUES (10,'An Giang'),(11,'Bà Rịa-Vũng Tàu'),(12,'B
 UNLOCK TABLES;
 
 --
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `news` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `salary` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `experiance` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_working` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `time_start` date NOT NULL,
+  `time_end` date NOT NULL,
+  `employer_id` int NOT NULL,
+  `career_id` int NOT NULL,
+  `location_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `news_location_idx` (`location_id`),
+  KEY `news_career_idx` (`career_id`),
+  KEY `news_employer_idx` (`employer_id`),
+  CONSTRAINT `news_career` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
+  CONSTRAINT `news_employer` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`),
+  CONSTRAINT `news_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `news`
 --
 
@@ -74,6 +196,25 @@ LOCK TABLES `news` WRITE;
 INSERT INTO `news` VALUES (1,'Cong nghe thong tin','2000USD','5 months','Developer','Cong nghe thong tin','2021-05-02','2021-05-20',4,14,8),(2,'Ban tra sua','100USD','1 month','Ban hang','Ban hang','2021-04-25','2021-05-17',4,3,2),(3,'Ban tra sua','100USD','1 month','Ban hang','Ban hang','2021-04-25','2021-05-17',4,3,2),(4,'Experienced leader and finance professional','3500USD','2 years','Member','Member','2021-05-09','2021-05-21',4,20,19),(5,' Treatment Planning Doctor','5000USD','5 years','Doctor','Doctor in the team','2021-01-04','2021-05-09',7,22,17),(6,'CHC - Medical Affairs Manager','2500USD','3 years','Manager in a team','Ensure a Medical Plan is written and implemented for each of the marketed brands','2021-05-03','2021-05-12',7,22,12),(7,'Medical Advisor','4200USD','5 years','Associate','To respond to all external scientific and medical queries from physicians, regulatory authorities and public alike in an accurate.','2021-05-03','2021-05-12',7,22,12),(8,'Financial Analyst Supervisor','900USD','4 months','Fresher','In charge of the Groupâs funding needs and arrange funding sources in a timely manner','2021-02-13','2021-05-17',6,3,45),(9,'Compliance Analyst - Financial Intelligence Unit','1500USD','7 months','Applicants','Reviews high risk account documentation and collaborates with internal partners to ensure information is accurate','2021-05-16','2021-05-27',7,24,26),(10,'Customer Service Specialist','1000USD','3 months','Applicant','Binance is a client-facing business, and Customer Service is extremely important for us.','2021-05-02','2021-05-29',2,18,29),(11,'Customer Service Manager','1500USD','1 year','Manager','Binance is a client-facing business, and Customer Service is extremely important for us.','2021-05-02','2021-05-29',2,18,1),(12,'Customer Service [Internship]','800 USD','6 months','Manager','Contribute to an overall exceptional experience from check-in through check-out.','2021-03-19','2021-05-17',2,18,9),(13,'Customer Service Applicant','500USD','2 months','Applicant','Support Customer Care staff and Customer Care Supervisor in paper works.','2021-02-07','2021-05-17',5,18,10),(14,'System Analyst Support','1000USD','3 months','Coder','Lap trinh cac thiet bi dien tu','2021-04-27','2021-05-16',8,14,2),(15,'Game Design Intern','2000 USD','1 year','Coder','Game Design Intern Job Description: As a member of the Game Design team of Gear Inc. in Vietnam','2021-04-27','2021-05-16',8,14,1),(16,'Fullstack Developer','1500 USD','2 years','Developer','We are looking for a senior level full stack developer with a strong product mindset who loves developing products from DB to clients.','2021-05-02','2021-05-17',8,14,31),(17,'Junior/Senior FE Developer','1700 USD','1 year','Developer','Coder','2021-05-02','2021-05-10',8,14,2),(18,'Developer Fullstack','2000 USD','3 years','Developer','We are looking for a qualified junior/senior FE Developer with a growth mindset and practical skills, wanting to advance their career by VietNam','2021-02-25','2021-05-12',9,14,5),(19,'Developer Frontend','1500 USD','2 years','Developer','Information Technology & Services  Computer Software  Internet','2021-02-25','2021-05-12',9,14,5);
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_name`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
@@ -94,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-11 23:53:00
+-- Dump completed on 2021-05-12 22:25:21
