@@ -44,3 +44,16 @@
 .button:hover {
   background-color: #555;
 }
+.read .btn {
+  text-decoration: none;
+  border: 1px solid rgb(27, 26, 26);
+  /* transition: 0.5s;
+  transform: translateY(-40px);
+  opacity: 0; */
+  float: right;
+}
+
+.read .btn:hover {
+  color: #000;
+  background: #fff;
+}
