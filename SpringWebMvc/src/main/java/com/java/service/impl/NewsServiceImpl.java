@@ -42,5 +42,10 @@ public class NewsServiceImpl implements NewsService {
     public News getNewsById(int i) {
         return this.newsRepository.getNewsById(i);
     }
+
+    @Override
+    public List<News> getNewsByEmpoyerUsername(String employerUsername) {
+        return this.newsRepository.getNewsByEmpoyerUsername(employerUsername);
+    }
     
 }

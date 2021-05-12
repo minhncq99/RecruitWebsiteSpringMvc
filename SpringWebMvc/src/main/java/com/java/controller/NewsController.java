@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,14 +31,21 @@ public class NewsController {
     @ModelAttribute
     public void modelAttribute(Model model) {
         model.addAttribute("cssfile", "news");
+        model.addAttribute("cssfile", "company");
     }
     
     @RequestMapping("")
     public String news(Model model) {
-        model.addAttribute("cssfile", "company");
         model.addAttribute("careers", careerService.getCareers());
         model.addAttribute("locations", workLocationService.getLocations());
         model.addAttribute("news", newsService.getNewgestNews(1, 8));
+        return "news";
+    }
+    
+    @RequestMapping("/{employerUsername}")
+    public String getNewsByEmoloyerUsername(
+            @PathVariable("employerUsername") String employerUsername ,Model model) {
+        model.addAttribute("news", newsService.getNewsByEmpoyerUsername(employerUsername));
         return "news";
     }
 }

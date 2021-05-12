@@ -19,7 +19,7 @@
                 <a class="nav-link" href="<c:url value="/employer/" />">Đăng tin</a>
             <% } %>
             <% if (request.isUserInRole("ROLE_APPLICANT")) { %>
-                <a class="nav-link" href="<c:url value="/news/" />">Bảng tin</a>
+                <a class="nav-link" href="<c:url value="/news/" />">Bản tin</a>
             <% }%>
             <a class="nav-link" href="<c:url value="/contact/" />">Liên hệ</a>
             <button>Menu</button>

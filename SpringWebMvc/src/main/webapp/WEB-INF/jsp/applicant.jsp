@@ -125,7 +125,7 @@
             <div class="content-detail">
                 Contact email: ${e.user.email}
             </div>
-            <a href="<c:url value="/news/" />">Read More</a>
+            <a href="<c:url value="/news/${e.user.userName}" />">Read More</a>
             </div>
         </div>
     </c:forEach>
