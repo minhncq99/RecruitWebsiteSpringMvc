@@ -34,26 +34,26 @@
                 <div class="thumbnail">
                     <img src="<c:url value="/resources/images/work1.jpg" />" alt="Paris" width="400" height="300">
                     <p><strong>Hồ Chí Minh</strong></p>
-                    <p>Friday 27 November 2015</p>
+                    <p>Thứ 6, 27/05/2015</p>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <img src="<c:url value="/resources/images/work2.jpg" />" alt="Paris" width="400" height="300">
                     <p><strong>Hà Nội</strong></p>
-                    <p>Saturday 28 November 2015</p>
+                    <p>Thứ 2, 11/03/2015</p>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <img src="<c:url value="/resources/images/work3.jpg" />" alt="Paris" width="400" height="300">
                     <p><strong>Đà Nẵng</strong></p>
-                    <p>Sunday 29 November 2015</p>
+                    <p>Thứ 5, 29/11/2015</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="read">
-    <button class="btn"><a href="<c:url value="/news/" />">Read More</a></button>
+    <button class="btn"><a href="<c:url value="/news/" />">Xem thêm</a></button>
 </div>

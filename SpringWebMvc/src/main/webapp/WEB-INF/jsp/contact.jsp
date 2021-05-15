@@ -5,7 +5,7 @@
   <h2 class="text-center">CONTACT US</h2>
   <div class="row gutters-sm">
     <div class="col-md-4 mb-3">
-      <h5>Contact us and we'll get back to you within 24 hours.</h5>
+      <h5>Liên hệ cho chúng tôi và chúng tôi sẽ liên hệ trong vòng 24 giờ.</h5>
       <hr style="border-top: 1px solid blue;">
       <p>Địa chỉ: Thành phố Hồ Chí Minh, Việt Nam</p>
       <p>Số điện thoại: +00 1515151515</p>

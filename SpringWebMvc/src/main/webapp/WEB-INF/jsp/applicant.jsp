@@ -123,9 +123,9 @@
             <div class="detail">
                 <p>${e.user.name}</p>
             <div class="content-detail">
-                Contact email: ${e.user.email}
+                Liên hệ email: ${e.user.email}
             </div>
-            <a href="<c:url value="/news/${e.user.userName}" />">Read More</a>
+            <a href="<c:url value="/news/" />">Xem thêm</a>
             </div>
         </div>
     </c:forEach>

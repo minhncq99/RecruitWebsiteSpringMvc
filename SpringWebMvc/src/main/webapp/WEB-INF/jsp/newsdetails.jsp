@@ -22,7 +22,7 @@
                 <p>Tên công ty tuyển dụng: ${news.employer.user.name}</p>
                 <p>Mô tả công việc: ${news.description}</p>
             </div>
-            <a href="<c:url value="/news/" />">Read More</a>
+            <a href="<c:url value="/news/" />">Xem thêm</a>
         </div>
     </div>
 </div>

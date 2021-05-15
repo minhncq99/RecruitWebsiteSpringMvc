@@ -132,7 +132,7 @@
                 <nav aria-label="pagination" class="d-flex justify-content-end">
                     <ul class="pagination">
                         <li class="page-item ${previous}">
-                            <a class="page-link" href="<c:url value='/employer/history/${select -1}'/>">Previous</a>
+                            <a class="page-link" href="<c:url value='/employer/history/${select -1}'/>">Trang trước</a>
                         </li>
                         <c:forEach items="${listPage}" var="l">
                             <c:choose>
@@ -147,7 +147,7 @@
                                 </c:choose>
                             </c:forEach>
                         <li class="page-item ${next}">
-                            <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Next</a>
+                            <a class="page-link" href="<c:url value='/employer/history/${select +1}'/>">Trang kế</a>
                         </li>
                     </ul>
                 </nav>
@@ -182,12 +182,12 @@
                                     <div class="container-text">
                                         <h5>${a.user.name}</h5>
                                         <p>Email: ${a.user.email}</p>
-                                        <p>Experience: ${a.experiance}</p>
-                                        <p>Career: ${a.career.name}</p>
-                                        <p>Description: ${a.description}</p>
+                                        <p>Kinh nghiệm: ${a.experiance}</p>
+                                        <p>Ngành nghề: ${a.career.name}</p>
+                                        <p>Mô tả: ${a.description}</p>
                                     </div>
                                     <div class="button-detail">
-                                        <a type="button" class="btn btn-success">More</a>
+                                        <a type="button" class="btn btn-success">Xem thêm</a>
                                     </div>
                                 </div>   
                             </div>
